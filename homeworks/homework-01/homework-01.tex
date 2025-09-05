@@ -230,20 +230,86 @@ consider a cells means model with $T=4$ treatments and $n_1=n_2=5,n_3=3,n_4=7$
 \end{itemize}
 
 \section*{Problem 12: Fixed-Effect Model with Unequal Group Sizes}
+consider a cells means model with $T=4$ treatments and $n_1=n_2=5,n_3=3,n_4=7$ 
 \begin{itemize}
 	\item[(a)] Proposed fixed-effect model:
+      \[
+    y_{ij} = \mu + \alpha_i + \varepsilon_{ij}, \quad i = 1, 2, 3, 4,\quad j = 1, \dots, n_i
+  \]
 	\item[(b)] Design matrix $X$ and its rank:
+      \[
+    X = \begin{bmatrix}
+      1 & 1 & 0 & 0 \\
+      1 & 1 & 0 & 0 \\
+      1 & 1 & 0 & 0 \\
+      1 & 1 & 0 & 0 \\
+      1 & 1 & 0 & 0 \\
+      1 & 0 & 1 & 0 \\
+      1 & 0 & 1 & 0 \\
+      1 & 0 & 1 & 0 \\
+      1 & 0 & 1 & 0 \\
+      1 & 0 & 1 & 0 \\
+      1 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 1 \\
+      1 & 0 & 0 & 1 \\
+    \end{bmatrix}, \quad \text{rank}(X) = 4
+  \]
 	\item[(c)] Computation of $X'X$:
+      \[
+    X'X =
+    \begin{bmatrix}
+      20 & 5 & 5 & 7 \\
+      5 & 5 & 0 & 0 \\
+      5 & 0 & 5 & 0 \\
+      7 & 0 & 0 & 7 \\
+    \end{bmatrix}
+  \]
 	\item[(d)] OLS estimates as a function of $y$:
+      \[
+    \hat{\beta} = (X'X)^{-1} X'y
+  \]
 	\item[(e)] Using Table 1 dataset:
 	\begin{itemize}
 		\item[i.] OLS estimates:
-		\item[ii.] Projection matrix $P_X$:
+    \[
+      \hat{\mu} = \bar{y}_{..} = 13.0885
+    \]
+    \[
+      \hat{\alpha}_i = \bar{y}_{i.} - \bar{y}_{..}
+    \]
+    \[
+    \begin{aligned}
+      \hat{\alpha}_1 &= 4.89 - 13.0885 = -8.1985 \\
+      \hat{\alpha}_2 &= 7.224 - 13.0885 = -5.8645 \\
+      \hat{\alpha}_3 &= 12.7333 - 13.0885 = -0.3552 \\
+      \hat{\alpha}_4 &= 14.103 - 13.0885 = 1.0145 \\
+    \end{aligned}
+    \]		
+  \item[ii.] Projection matrix $P_X$:
+        \[
+      P_X = X (X'X)^{-1} X'
+    \]
 		\item[iii.] Compute $y'(I - P_X)y$:
+          \[
+      y'(I - P_X)y = \sum_{i=1}^4 \sum_{j=1}^{n_i} (y_{ij} - \hat{\mu} - \hat{\alpha}_i)^2 = 111.0322
+    \]
 		\item[iv.] Compute $\bar{y}_{..}$ and $\bar{y}_i.$ for all $i$:
+          \[
+    \bar{y}_{..} = \frac{1}{20} \sum y = 13.0885
+    \]
+    \[
+    \bar{y}_{1.} = 4.89, \quad \bar{y}_{2.} = 7.224, \quad \bar{y}_{3.} = 12.7333, \quad \bar{y}_{4.} = 14.103
+    \]
 		\item[v.] Estimability of $\alpha_1$:
+no?
 		\item[vi.] Estimability of $\alpha_2 - \alpha_3$:
+      Yes, \(\alpha_2 - \alpha_3\)
 		\item[vii.] Estimability of $\alpha_1 - \frac{\alpha_3 + \alpha_4}{2}$:
+      Yes, this is a linear combination of estimable contrasts,
 	\end{itemize}
 \end{itemize}
 
