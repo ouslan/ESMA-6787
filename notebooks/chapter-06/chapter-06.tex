@@ -1,0 +1,115 @@
+\documentclass[10pt, oneside]{article}
+\usepackage{amsmath, amsthm, amssymb, calrsfs, wasysym, verbatim, bbm, color, graphics, geometry}
+
+\geometry{tmargin=.75in, bmargin=.75in, lmargin=.75in, rmargin = .75in}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Cdot}{\boldsymbol{\cdot}}
+
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{conv}{Convention}
+\newtheorem{rem}{Remark}
+\newtheorem{lem}{Lemma}
+\newtheorem{cor}{Corollary}
+
+
+\title{Running Lecture Outline: [Course Code]}
+\author{[Alejandro Ouslan]}
+\date{Academic Year 2025-2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\vspace{.25in}
+
+\section{Introduciotn}
+\begin{enumerate}
+	\item Row-Collumn Design: units can reasonably be sorted by two
+	      characteristics rather thatn one, and the most commonly used of
+	      these are Latin Square Designs (LSD)
+	\item The result is a two-way classification of units based on two
+	      protential sources of nuisance variataion, so the unit-to-unit relationships
+	      cannot be descirbed independently within rows ignoring columns, or
+	      independetly withing columns ignoring rows.
+	\item In order to ensure treatment-block balance comparable to that dfound in
+	      CRBDs,
+	      \begin{enumerate}
+		      \item Design is a CRBD with respect to rows as blocks, ignoring columns
+		      \item Designs is a CRD with respect to columns as block, ignoring rows.
+	      \end{enumerate}
+	\item This is , in fact, how a Lating Square Design is contructed.
+\end{enumerate}
+
+\section{Latin Squares design (LSD)}
+\begin{enumerate}
+	\item THe number of rwo-blocks of units must be  $t$ (the number of
+	      treatments), since each treatment must appear exactly once in each column-block.
+	\item The number of colus-blocks of units must be $t$, since each treatment
+	      must appear exactly once in each row-block.
+	\item THerefore, a LSD must contain a total of $t^2$ units, $t$ of which
+	      must be assigned to each treatment, and result in $N=t^2$ data
+	      values for each responce variable.
+\end{enumerate}
+$$
+	\begin{bmatrix}
+		1 & 2 & 3 \\
+		2 & 3 & 1 \\
+		3 & 1 & 2
+	\end{bmatrix}
+$$
+$$
+	\begin{bmatrix}
+		1 & 2 & 3 & 4 \\
+		2 & 3 & 1 & 2 \\
+		3 & 1 & 2 & 2 \\
+		8 & 1 & 2 & 1
+	\end{bmatrix}
+$$
+\begin{enumerate}
+	\item Since each experimetntal unit is consitain in two blocks,
+	      randomizaiton is somewhat less straightfoward for LsDs thatn wiht
+	      with CBDs.
+	\item randomizaiton
+\end{enumerate}
+
+\section{Linear Model for LSD}
+\subsection{ANOVA skeleton for LSD}
+\subsection{Exampel: Operatiors and machine}
+Consider a factory setting where you are producing a product with 4
+operators and 4 machines. We call the columns the operators and
+the rows the machines. Then you can randomly assign the specific
+operators to a row and the specific macines to a column. The
+treatment is one of four protocols for producing the product and our
+interest is in the average time needed to produce each product.
+Create a the ANOVA skeleton.
+$$
+	\begin{bmatrix}
+		1 & 2 & 3 & 4 \\
+		4 & 1 & 2 & 3 \\
+		3 & 4 & 1 & 2 \\
+		2 & 3 & 4 & 1
+	\end{bmatrix}
+$$
+
+\subsection{Model in matix from}
+Consider the follwing:
+$$
+	y = X_1\theta + X_2\tau + \epsilon
+$$
+\begin{enumerate}
+	\item Modle matrix for $\mu, \alpha, \beta$
+	      \[
+		      \begin{split}
+			      X_1 = []
+		      \end{split}
+	      \]
+\end{enumerate}
+\end{document}
+
