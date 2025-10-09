@@ -156,27 +156,155 @@
 
 % Homework problem 2
 \begin{homeworkProblem}
-	Consider a copmletely randomized design wiht four treat ment groups, with $n_i>0$ units assigned to treatment $i=1,2,3,4$.
+	Consider a completely randomized design with four treatment groups, with $n_i>0$ units assigned to treatment $i=1,2,3,4$.
 	\begin{enumerate}
-		\item
+		\item One way to model data from such an experiment is with the effect model:
+		      $$
+			      y_{ij}=\alpha + \tau_i + \epsilon{ij}, \quad i=1,2,3,4; \quad j= 1.\ldots, n_i
+		      $$
+		      Under this model show why each of the following is estimable or nonestimable:
+		      $$
+			      \tau_3, \tau_3 - \tau_2, \tau_3 + \tau_2
+		      $$
+		\item Now define a different model for the same experiment, as:
+		      $$
+			      y_{1j}= \mu_1 + \epsilon_{1j}, \quad j=1,\ldots,n_i
+		      $$
+		      $$
+			      y_{ij}= \mu_1 + \theta_i + \epsilon_{ij} \quad i=2,3,4; \quad j=1,\ldots,n_i
+		      $$
+		      Under this model, show why each of the followings is estimable or nonestimable:
+		      $$
+			      \theta_3,\theta_3-\theta_2, \theta_3 + \theta_2
+		      $$
 	\end{enumerate}
 \end{homeworkProblem}
+
 % Homework problem 3
 \begin{homeworkProblem}
 
+	A chemical engineer is interested in comparing three different versions of a reaction process, labeled
+	A, B, and C, with respect to “percent conversion of feedstock.” In a preliminary experiment, she
+	applied each process to four batches of raw material, using appropriate randomization of the 12
+	available batches to the three treatments, and collected the percent conversion values presented in
+	the following table.
+
+	$$
+		\begin{array}{|c|c|c|}
+			\hline
+			A    & B    & C    \\
+			\hline
+			27.3 & 41.9 & 36.8 \\
+			31.6 & 36.8 & 39.2 \\
+			34.6 & 38.9 & 36.1 \\
+			29.4 & 37.5 & 38.0 \\
+			\hline
+		\end{array}
+	$$
+
+	Assuming the data are independent and can be reasonably modeled as:
+	$$
+		y_{ij}= \mu_i + \epsilon{ij}, \quad E(e_{ij})=0, \quad Var(e_{ij})= \sigma^2
+	$$
+	\begin{enumerate}
+		\item Estimate $\sigma^2$ and test the hypothesis: $\mu_i = \mu_2 = \mu_3$ against $H_1$: at least one of $\mu_i$ is different.
+		\item Using your estimate of $\sigma$ as if it were the true parameter value, how large would a follow-up experiment
+		      (with equal sample sizes) have to be so that the $0.05$-level confidence interval for $\mu_1 - \mu_3$ would have expected width ($5\%$).
+	\end{enumerate}
+
 \end{homeworkProblem}
+
 % Homework problem 4
 \begin{homeworkProblem}
-
+	Consider a completely randomized design with five treatment groups, in which a total of $N = 50$
+	units are to be used. Although it won’t be explicitly used in the analysis model, treatments $1$
+	through $5$ actually represent increasing concentrations of one component in an otherwise standard
+	chemical compound, and the primary purpose of the experiment is to understand whether certain
+	measurable properties of the compound change with this concentration. The investigator decides
+	to address these questions by estimating four quantities:
+	$$
+		\tau_2 - \tau_1,\tau_3-\tau_2,\tau_4-\tau_3,\tau_5-\tau_4
+	$$
+	where each $\tau_i$ is a parameter in the standard effects model. Find the optimal allocation for the $50$
+	available units (i.e., values for $n_1,\ldots , n_5$) that minimizes the average variance of estimates of the
+	four contrasts of interest. Do this as a constrained, continuous optimization problem, then round
+	the solution to integer values that are consistent with the required constraint.
 \end{homeworkProblem}
+
 % Homework problem 5
 \begin{homeworkProblem}
-
+	Continue working with the experimental design described in problem 2. Suppose the experiment-
+	specific treatment means in this problem, as would be expressed in the cell means model, are
+	actually:
+	$$
+		\begin{array}{|c|c|c|c|c|}
+			\hline
+			\mu_1 & \mu_2 & \mu_3 & \mu_4 & \mu_5 \\
+			\hline
+			10    & 11    & 12    & 12    & 12    \\
+			\hline
+		\end{array}
+	$$
+	and $\sigma=2$. What is the power of the standard F-test for the hypothesis
+	$$
+		\tau_1 = \tau_2 = \tau_3 = \tau_4 = \tau_5
+	$$
+	at $\alpha=0.05$:
+	\begin{enumerate}
+		\item if all $n_i=10$?
+		\item under the optimal sample sample allocation you found in problem 2?
+		\item Derive an optimal allocation for the F-test of equal treatment effects, i.e, the sample size
+		      (totaling 50) that would result in the greatest power, if in reality the experiment-specific means are
+		      $\mu_1=10$ and $\tau_2 = \tau_3 = \tau_4 = \tau_5 =8$
+	\end{enumerate}
 \end{homeworkProblem}
+
 % Homework problem 6
 \begin{homeworkProblem}
+	The entire class of ESMA 6616 wanted to study how the power of the F changes with the non-
+	centrality parameter $\lambda^2$. To achieve this we will do as follow. Consider the model
+	$$
+		y_{ij} = \mu_i + \epsilon_{ij}
+	$$
+	Where $\epsilon_{ij}\sim N(0,\sigma^2)$, with $i=1,\ldots,k$ and $j=1,...,n_i$.
+
+	The null and alternative hypotheses for the ANOVA F-test are
+	\[
+		\begin{split}
+			H_0 & : \mu_1 = \ldots = \mu_k           \\
+			H_1 & : \text{at least one is different}
+		\end{split}
+	\]
+	The test rejects $H_0$ if the $F^\star$-statistic, defined as $F^\star = \frac{MS_{model}}{MS_{error}}$ , exceeds
+	a critical value.
+
+	The power of the ANOVA F-test, which measures the probability of rejecting $H_0$ when $H_1$ is true, is
+	given by $P(F^\star > \alpha|H_1)$. To calculate the power, we must know the distribution
+	of $F\star$. Under $H_0$, $F^\star \sim F_{k-1,\sum_{k}^{i=1}n_i-k}$
+	degrees of freedom. The distribution under $H_1$ depends on
+	the true differences among the group means.
+
+	Consider the following example $k = 5$ treatment groups with group sizes $n_1 = n_2 = n_3 = 10, n_4 = 8$,
+	and $n_5 = 6$. Further, assume the standard deviation $\sigma = 1.5$. The task is to find the power of the
+	test when $H_1$ is true, given the group means $\mu_1 = 2, \mu_2 = 3, \mu_3 = 2.5, \mu_4 = 0$, and $\mu_5 = 1$. Assume
+	we are using a significance level of 0.05.
+
+	The overall mean is defined $\bar{\mu}= \sum_{5}^{i=1}n_i*\frac{\mu_i}{\sum_{5}^{i=1}*n_i}$
+
+	The non-centrality parameter is $\frac{\sum_{5}^{i=1}n_i(\mu_i-\bar{\mu})^2}{\sigma^2}$
+
+	In R, the argument ncp stands for the non-centrality parameter in the desity functions. In this example, the test statisic
+	have the following distribution $F^\star \sim F_{5-1,40-5}(\lambda^2=0)$ under $H_0$ and $F^\star \sim F_{5-1,40-5}(\lambda^2 = 15.32222)$ under $H_1$.
+
+	Figure 1 showed the difference between the F distribution under the null hypothesis(solid red) with
+	4 and 35 with non-centrality parameter of 0 and the F under the alternative (dashed blue) with
+	the same degrees of freedom but non-centrality parameter $\lambda^2 = 15.3222$. We can observed as $\lambda^2$
+	increases the density under the alternative get farther from the null. The critical value to reject $H_0$
+	keeping the significance level $2.6415$. If $H_1$ is true and $F^\star \sim F_{5-1,40-5}(\lambda^2 = 15.32222)$, the power
+	to reject $H_0$ is the
 
 \end{homeworkProblem}
+
 % Homework problem 7
 \begin{homeworkProblem}
 
