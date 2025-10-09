@@ -76,23 +76,54 @@
 \newtcolorbox{pythonbox}[1][]{pythoncodebox=#1}
 \newtcolorbox{pythonbox*}[1][]{pythoncodebox*=#1} % Starred version has no frame
 
-% Custom minted environment for Python code, NOT using tcolorbox
-\newminted{python}{autogobble,breaklines,mathescape}
-
-% Custom tcblisting environment for Python code, using the "minted" tcb listing engine
-% Adapted from https://tex.stackexchange.com/a/402096
-\NewTCBListing{python}{ !O{} !D(){} !G{} }{
-    listing engine=minted,
-    listing only,
-    pythoncodebox={#1}, % First argument specifies the title (if any)
-    minted language=python,
-    minted options/.expanded={
-        autogobble,breaklines,mathescape,
-        #2 % Second argument, delimited by (), denotes options for the minted environment
+\tcbset{
+    rcodebox/.style={
+        enhanced jigsaw,breakable,
+        colback=blue!5,colframe=blue!40!black,
+        boxrule=1pt,top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top left,
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolframe] (frame.south west)
+                --([yshift=-4pt]frame.north west)
+                to[out=90,in=180] ([xshift=4pt]frame.north west)
+                --([xshift=-8pt]frame.north east)
+                to[out=0,in=180] ([xshift=16pt]frame.south east)
+                --cycle;
+            }
+        },
+        title={#1},
+        fonttitle=\sffamily\bfseries
     },
-    #3 % Third argument, delimited by {}, denotes options for the tcolorbox
+    rcodebox/.default={}, % Default title = none
+    % Starred version has no frame
+    rcodebox*/.style={
+        enhanced jigsaw,breakable,
+        colback=blue!5,coltitle=blue!40!black,colbacktitle=tcbcolback,
+        frame hidden,
+        top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top text left={yshift=-1mm},
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolback] (interior.south west)
+                --([yshift=-4pt]interior.north west)
+                to[out=90,in=180] ([xshift=4pt]interior.north west)
+                --([xshift=-8pt]interior.north east)
+                to[out=0,in=180] ([xshift=16pt]interior.south east)
+                --cycle;
+            }
+        },
+        title={#1},
+        fonttitle=\sffamily\bfseries
+    },
+    rcodebox*/.default={}, % Default title = none
 }
 
+% Custom tcolorbox environments
+\newtcolorbox{rbox}[1][]{rcodebox=#1}
+\newtcolorbox{rbox*}[1][]{rcodebox*=#1}
 
 % Basic Document Settings
 \topmargin=-0.45in
@@ -116,7 +147,7 @@
 % Homework Details
 \newcommand{\hmwkTitle}{Examen 3}
 \newcommand{\hmwkDueDate}{Mayo 12, 2025}
-\newcommand{\hmwkClass}{ESMA 5015}
+\newcommand{\hmwkClass}{ESMA 6787}
 \newcommand{\hmwkClassInstructor}{Damaris Santana}
 \newcommand{\hmwkAuthorName}{\textbf{Alejandro Ouslan}}
 
@@ -304,8 +335,69 @@ To interpret this value, the probability of rejecting the null hypothesis (non d
 means) when in fact there’s difference across the means is $0.8489$. To compute the critical value
 and the power in R you can do the following,
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{assets/prob6.png}
+	\caption{Comparison of the central (solid red) and non-central (dashed blue) $F$-distribution.}
+\end{figure}
+
+\begin{enumerate}
+	\item Calculate the overall mean.
+	\item Calculate the non-centrality parameter. Hint: The non-centrality parameter
+	      should be a function of $n$.
+	\item Find the critical value at the $5\%$ level. Note that the degrees of freedom should be a function of the
+	      sample size $n$ as well.
+	\item Compute the power for each sample size $n$, i.e., $n=2,3,4,\ldots,n_{min}$
+	      where $n{min}$ is the minimum sample size such that power $\ge 0.95$.
+	\item Use the following code to show your figure. This code will create the smae figure in this document, but you
+	      must modify it to include your information.
+\end{enumerate}
+
+\begin{rbox}[Example Code]
+	\inputminted{r}{code/prob6.R}
+\end{rbox}
 
 % Homework problem 7
 \section{problem 7}
-
+The entire class of ESMA 6616 wanted to study how the power of the F -test changes with the
+non-centrality parameter $\lambda^2$. To achieve this, we will proceed as follows. Consider the model
+$$
+	y_{ij}= \mu_i + \epsilon_{ij}
+$$
+where $e{ij} \sim N(0,\sigma^2)$ with $i=1,\ldots,k$ and $j=1,\ldots,n_i$.
+The null and alternative hypotheses for the ANOVA $F$-test are
+$$
+	H_0:\mu_i=\cdots=\mu_k \quad H_1: \text{at least one  $\mu_i$ is different}
+$$
+The test rejects $H_0$ if the statistic
+$$
+	F^\star = \frac{MS_{model}}{MS_{error}}
+$$
+exceeds a critical value.
+The power of the ANOVA F -test, which measures the probability of rejecting H0 when H1 is true,
+is given by
+$$
+	P(F^\star>\text{crtitical value}| H_1)
+$$
+To calculate the power, we must know the distribution of $F^\star$. Under $H_0$, we have
+$$
+	F^\star \sim F_{k-1,\sum_{i=1}^{k}n_i-k}
+$$
+The distribution under $H_1$ depends on the true differences among the group means.
+Example: Consider $k = 5$ treatment groups with sample sizes $n_1 = n_2 = n_3 = 10, n_4 = 8$, and
+$n_5 = 6$. Assume the standard deviation $\sigma = 1.5$. The task is to find the power of the test when $H_1$
+is true, given the group means
+$$
+	\mu_1 = 2, \mu_2 = 3, \mu_3 = 2.5, \mu_4 =0, \mu_5 = 1
+$$
+with a significance level $\alpha = 0.05$
+\begin{enumerate}
+	\item Calculate the overall mean.
+	\item Calculate the non-centrality parameter. (Note: it should be a function of $n$).
+	\item Find the critical value at the $5\%$ level. Note that the degrees of freedom should be a function of the
+	      sample size $n$ as well.
+	\item Compute the power for each sample size $n$, i.e., $n=2,3,4,\ldots,n_{min}$
+	      where $n{min}$ is the minimum sample size such that power $\ge 0.95$.
+	\item se the provided R code to produce your figure. Modify the code to include your information
+\end{enumerate}
 \end{document}

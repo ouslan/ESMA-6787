@@ -162,9 +162,4 @@ cython_debug/
 #.idea/
 
 # Latex ignore
-*.aux
-*.fdb_latexmk
-*.fls
-*.out
-*.toc
-*.synctex.gz
+**/aux/
