@@ -163,3 +163,4 @@ cython_debug/
 
 # Latex ignore
 **/aux/
+*.synctex.gz

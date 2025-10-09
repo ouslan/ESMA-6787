@@ -319,7 +319,7 @@ The overall mean is defined $\bar{\mu}= \sum_{5}^{i=1}n_i*\frac{\mu_i}{\sum_{5}^
 
 The non-centrality parameter is $\frac{\sum_{5}^{i=1}n_i(\mu_i-\bar{\mu})^2}{\sigma^2}$
 
-In R, the argument ncp stands for the non-centrality parameter in the desity functions. In this example, the test statisic
+In R, the argument ncp stands for the non-centrality parameter in the density functions. In this example, the test statistic
 have the following distribution $F^\star \sim F_{5-1,40-5}(\lambda^2=0)$ under $H_0$ and $F^\star \sim F_{5-1,40-5}(\lambda^2 = 15.32222)$ under $H_1$.
 
 Figure 1 showed the difference between the F distribution under the null hypothesis(solid red) with
@@ -335,6 +335,18 @@ To interpret this value, the probability of rejecting the null hypothesis (non d
 means) when in fact there’s difference across the means is $0.8489$. To compute the critical value
 and the power in R you can do the following,
 
+Some important details, the power of a test is not a single value, but a function of the parameters.
+If the parameters change also the power of the test.
+That’s the focus of this problem. One application of this is deciding how many observations will be
+reasonable in a study. Typically, if one is planning a study (or project) the number of observation
+needs to be known before hand. In this problem, we will study how the non-centrality parameter
+and power related to this.
+
+For simplicity, assume equal sample sizes n for all groups $(n_i = n)$, $i = 1, 2, 3, 4, 5$. Also, assume
+that $\mu_i$'s is have the following values $\mu_1 = 1.5$, $\mu_2 = 2$, $\mu_3 = 1$, $\mu_4 = -1.5$, and $\mu_5 = -3$, with standard
+deviation $\sigma = 5$. Our goal is to find minimal sample size n per groups to have a power $0.95$. You
+will need to plug in different values of n and see what is the smallest n to make power $0.95$. To
+answer this question, we will do it similar as the provided example and code.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{assets/prob6.png}
@@ -349,7 +361,7 @@ and the power in R you can do the following,
 	      sample size $n$ as well.
 	\item Compute the power for each sample size $n$, i.e., $n=2,3,4,\ldots,n_{min}$
 	      where $n{min}$ is the minimum sample size such that power $\ge 0.95$.
-	\item Use the following code to show your figure. This code will create the smae figure in this document, but you
+	\item Use the following code to show your figure. This code will create the same figure in this document, but you
 	      must modify it to include your information.
 \end{enumerate}
 
@@ -391,6 +403,55 @@ $$
 	\mu_1 = 2, \mu_2 = 3, \mu_3 = 2.5, \mu_4 =0, \mu_5 = 1
 $$
 with a significance level $\alpha = 0.05$
+
+The overall mena is defined as
+$$
+	\bar{\mu}= \frac{\sum_{i=1}^{5}n_i \mu_i}{\sum_{i=1}^{5}n_i}
+$$
+
+The non-centrality parameter is
+$$
+	\lambda^2 = \frac{\sum_{i=1}^{5}n_i(\mu_i-\bar{\mu})^2}{\sigma^2}
+$$
+In R, the argument ncp stands for the non-centrality parameter in the density functions. In this
+example, the test statistic has the following distribution:
+$$
+	F^\star \sim F_{5-1,40-5}(\lambda^2=0) \text{ under } H_0
+$$
+and
+$$
+	F^\star \sim F_{5-1,40-5}(\lambda^2=15.3222) \text{ under } H_1
+$$
+Figure 1 shows the difference between the F distribution under the null hypothesis (solid red) with
+4 and 35 (non-centrality parameter 0), and the F distribution under the alternative (dashed blue)
+
+with the same degrees of freedom but non-centrality parameter $\lambda^2 = 15.3222$. We can observed as $\lambda^2$
+increases the density under the alternative get farther from the null. The critical value to reject $H_0$
+at the significance level $2.6415$. If $H_1$ is true and
+$$
+	F^\star \sim F_{5-1,40-5}(\lambda^2 = 15.32222)
+$$
+then power to reject $H_0$ is the
+$$
+	P(F^\star>F_{k-1,\sum_{i=1}^{k}n_i-k,\alpha}|H_1)=0.8489175
+$$
+
+In words, the probability of rejecting the null hypothesis (no differences among means) when in
+fact differences exist is 0.8489. To compute the critical value and the power in R, you can use the
+following code.
+
+Important Remark: The power of a test is not a single value but a function of the parameters. If
+the parameters change, the power also changes. This is the focus of the problem. One important
+application is in deciding how many observations are needed in a study. Typically, the sample
+size must be determined before conducting the study. In this problem, we will study how the
+non-centrality parameter and power are related.
+
+For simplicity, assume equal sample sizes n for all groups $(n_i = n)$, $i = 1, 2, 3, 4, 5$. Also, assume
+that $\mu_i$'s is have the following values $\mu_1 = 1.5$, $\mu_2 = 2$, $\mu_3 = 1$, $\mu_4 = -1.5$, and $\mu_5 = -3$, with standard
+deviation $\sigma = 5$. Our goal is to find minimal sample size n per groups to have a power $0.95$. You
+will need to plug in different values of n and see what is the smallest n to make power $0.95$. To
+answer this question, we will do it similar as the provided example and code.
+
 \begin{enumerate}
 	\item Calculate the overall mean.
 	\item Calculate the non-centrality parameter. (Note: it should be a function of $n$).
