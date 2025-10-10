@@ -9,6 +9,7 @@
 \usepackage[plain]{algorithm}
 \usepackage{algpseudocode}
 \usepackage{listings}
+\usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
@@ -175,13 +176,20 @@
 \section{problem 1}
 Define using your own words:
 \begin{enumerate}
-	\item Estimate $c'\beta$
-	\item Power
-	\item Null hypothesis
-	\item Alternative hypothesis
-	\item Test Statistics
-	\item Non-centrality parameter
-	\item Details about the non-centrality parameter
+	\item Estimate $c'\beta$:
+	      \[
+		      \begin{split}
+			      Y = X\beta + \epsilon      \\
+			      \hat{beta} = (X'X)^{-1}X'Y \\
+			      \hat{c'}\beta = c'\hat{beta}
+		      \end{split}
+	      \]
+	\item Power: It's the probability of correctly rejecting the null hypothesis when the alternative is true
+	\item Null hypothesis: It is the assumed reality or state of the research question
+	\item Alternative hypothesis: It is the testing question of the research
+	\item Test Statistics: it is the criteria for rejecting the null the hypothesis
+	\item Non-centrality parameter: it quantifies how much the true value of the parameter is off by
+	\item Details about the non-centrality parameter:
 \end{enumerate}
 
 % Homework problem 2
@@ -196,6 +204,7 @@ Consider a completely randomized design with four treatment groups, with $n_i>0$
 	      $$
 		      \tau_3, \tau_3 - \tau_2, \tau_3 + \tau_2
 	      $$
+	      Only $\tau_3 - \tau_2$ is estimable since we can only estimate difference of the treatments
 	\item Now define a different model for the same experiment, as:
 	      $$
 		      y_{1j}= \mu_1 + \epsilon_{1j}, \quad j=1,\ldots,n_i
@@ -207,6 +216,7 @@ Consider a completely randomized design with four treatment groups, with $n_i>0$
 	      $$
 		      \theta_3,\theta_3-\theta_2, \theta_3 + \theta_2
 	      $$
+	      All of them are estimable given that we chose $n_1$ as the reference point and from there we can estimate all the estimators $\theta$
 \end{enumerate}
 
 % Homework problem 3
@@ -237,8 +247,43 @@ $$
 $$
 \begin{enumerate}
 	\item Estimate $\sigma^2$ and test the hypothesis: $\mu_i = \mu_2 = \mu_3$ against $H_1$: at least one of $\mu_i$ is different.
+	      \[
+		      \begin{split}
+			      \bar{y}_A    & = \frac{27.3 + 31.6 + 34.6 + 29.4}{4} = 30.725          \\
+			      \bar{y}_B    & = \frac{41.9 + 36.8 + 38.9 + 37.5}{4} = 38.775          \\
+			      \bar{y}_C    & = \frac{36.8 + 39.2 + 36.1 + 38.0}{4} = 37.525          \\
+			      \bar{y}_{..} & = \frac{1}{12} \sum y_{ij} = \frac{468.1}{12} = 39.0083 \\
+		      \end{split}
+	      \]
+	      \subsection*{Step 2: ANOVA Sums of Squares}
+
+	      \[
+		      \begin{split}
+			      SST            & = \sum_{i=1}^{3} \sum_{j=1}^{4} (y_{ij} - \bar{y}_{..})^2 = 333.70                                   \\
+			      SSB            & = 4 \cdot \left[ (30.725 - 39.0083)^2 + (38.775 - 39.0083)^2 + (37.525 - 39.0083)^2 \right] = 282.93 \\
+			      SSE            & = SST - SSB = 333.70 - 282.93 = 50.77                                                                \\
+			      \hat{\sigma}^2 & = \frac{SSE}{N - k} = \frac{50.77}{12 - 3} = \frac{50.77}{9} = 5.64                                  \\
+			      F              & = \frac{MSB}{MSE} = \frac{141.465}{5.64} = 25.08                                                     \\
+		      \end{split}
+	      \]
+
+	      \( F_{2,9,0.05} \approx 4.26 \Rightarrow \text{Reject } H_0 \)
+	      \vspace{1em}
+	      \begin{center}
+		      \begin{tabular}{lccc}
+			      \toprule
+			      Source  & SS     & df & MS      \\
+			      \midrule
+			      Between & 282.93 & 2  & 141.465 \\
+			      Within  & 50.77  & 9  & 5.64    \\
+			      Total   & 333.70 & 11 &         \\
+			      \bottomrule
+		      \end{tabular}
+	      \end{center}
 	\item Using your estimate of $\sigma$ as if it were the true parameter value, how large would a follow-up experiment
-	      (with equal sample sizes) have to be so that the $0.05$-level confidence interval for $\mu_1 - \mu_3$ would have expected width ($5\%$).
+	      \[
+		      \text{Width} = 2 \cdot t_{2(n - 1), 0.975} \cdot \sqrt{2 \cdot \frac{\hat{\sigma}^2}{n}} = 5
+	      \]
 \end{enumerate}
 
 
@@ -258,6 +303,35 @@ available units (i.e., values for $n_1,\ldots , n_5$) that minimizes the average
 four contrasts of interest. Do this as a constrained, continuous optimization problem, then round
 the solution to integer values that are consistent with the required constraint.
 
+\[
+	Y_{ij} = \mu + \tau_i + \epsilon_{ij}, \quad \epsilon_{ij} \overset{iid}{\sim} \mathcal{N}(0, \sigma^2),
+\]
+\[
+	\operatorname{Var}(\hat{\tau}_j - \hat{\tau}_i) = \sigma^2 \left( \frac{1}{n_i} + \frac{1}{n_j} \right).
+\]
+\begin{align*}
+	\operatorname{Var}(\hat{\tau}_2 - \hat{\tau}_1) & = \sigma^2\left( \frac{1}{n_1} + \frac{1}{n_2} \right), \\
+	\operatorname{Var}(\hat{\tau}_3 - \hat{\tau}_2) & = \sigma^2\left( \frac{1}{n_2} + \frac{1}{n_3} \right), \\
+	\operatorname{Var}(\hat{\tau}_4 - \hat{\tau}_3) & = \sigma^2\left( \frac{1}{n_3} + \frac{1}{n_4} \right), \\
+	\operatorname{Var}(\hat{\tau}_5 - \hat{\tau}_4) & = \sigma^2\left( \frac{1}{n_4} + \frac{1}{n_5} \right).
+\end{align*}
+\[
+	\begin{split}
+		f(n_1, \ldots, n_5) = \frac{1}{4} \left( \frac{1}{n_1} + \frac{2}{n_2} + \frac{2}{n_3} + \frac{2}{n_4} + \frac{1}{n_5} \right),                                    \\
+		n_1 + n_2 + n_3 + n_4 + n_5 = 50, \quad n_i > 0.                                                                                                                   \\
+		\mathcal{L} = \frac{1}{4} \left( \frac{1}{n_1} + \frac{2}{n_2} + \frac{2}{n_3} + \frac{2}{n_4} + \frac{1}{n_5} \right) + \lambda(n_1 + n_2 + n_3 + n_4 + n_5 - 50) \\
+		\frac{\partial \mathcal{L}}{\partial n_1} = -\frac{1}{4n_1^2} + \lambda = 0 \Rightarrow \lambda = \frac{1}{4n_1^2},                                                \\
+		\frac{\partial \mathcal{L}}{\partial n_2} = -\frac{2}{4n_2^2} + \lambda = 0 \Rightarrow \lambda = \frac{1}{2n_2^2},                                                \\
+		\text{(similarly for $n_3$, $n_4$)}, \quad \frac{1}{4n_5^2} = \lambda                                                                                              \\
+		\frac{1}{4n_1^2} = \frac{1}{2n_2^2} = \frac{1}{2n_3^2} = \frac{1}{2n_4^2} = \frac{1}{4n_5^2}                                                                       \\
+		\Rightarrow n_2 = n_3 = n_4 = \sqrt{2}n_1, \quad n_5 = n_1                                                                                                         \\
+		n_1 + \sqrt{2}n_1 + \sqrt{2}n_1 + \sqrt{2}n_1 + n_1 = 50 \Rightarrow n_1(2 + 3\sqrt{2}) = 50                                                                       \\
+		n_1 = \frac{50}{2 + 3\sqrt{2}} \approx \frac{50}{6.2426} \approx 8.008, \quad                                                                                      \\
+		n_2 = n_3 = n_4 \approx \sqrt{2} \cdot 8.008 \approx 11.33, \quad                                                                                                  \\
+		n_5 = n_1 \approx 8.008                                                                                                                                            \\
+		(n_1, n_2, n_3, n_4, n_5) = (8,\ 11,\ 12,\ 11,\ 8)                                                                                                                 \\
+	\end{split}
+\]
 % Homework problem 5
 \section{problem 5}
 Continue working with the experimental design described in problem 2. Suppose the experiment-
@@ -279,10 +353,110 @@ $$
 at $\alpha=0.05$:
 \begin{enumerate}
 	\item if all $n_i=10$?
+	      \[
+		      N = \sum_{i=1}^5 n_i = 50.
+	      \]
+	      \[
+		      \lambda = \frac{1}{\sigma^2} \sum_{i=1}^5 n_i (\mu_i - \bar{\mu})^2,
+	      \]
+	      \[
+		      \bar{\mu} = \frac{1}{5} \sum_{i=1}^5 \mu_i = \frac{10 + 11 + 12 + 12 + 12}{5} = 11.4.
+	      \]
+	      \[
+		      \begin{aligned}
+			      (\mu_1 - \bar{\mu})^2 & = (10 - 11.4)^2 = 1.96, \\
+			      (\mu_2 - \bar{\mu})^2 & = (11 - 11.4)^2 = 0.16, \\
+			      (\mu_3 - \bar{\mu})^2 & = (12 - 11.4)^2 = 0.36, \\
+			      (\mu_4 - \bar{\mu})^2 & = 0.36,                 \\
+			      (\mu_5 - \bar{\mu})^2 & = 0.36.
+		      \end{aligned}
+	      \]
+	      \[
+		      1.96 + 0.16 + 0.36 + 0.36 + 0.36 = 3.2.
+	      \]
+	      \[
+		      \lambda = \frac{1}{4} \times 10 \times 3.2 = 8.
+	      \]
+	      \[
+		      df_1 = 5 - 1 = 4, \quad df_2 = 50 - 5 = 45.
+	      \]
+	      \[
+		      \text{Power} = P\left(F_{4,45,\lambda=8} > F_{4,45,0;0.05}\right),
+	      \]
+
 	\item under the optimal sample sample allocation you found in problem 2?
+
+	      \[
+		      \lambda^* = \frac{1}{\sigma^2} \sum_{i=1}^5 n_i^* (\mu_i - \bar{\mu}^*)^2,
+	      \]
+	      \[
+		      \bar{\mu}^* = \frac{\sum n_i^* \mu_i}{N}.
+	      \]
+	      Using the optimal $n_i^*$ will increase $\lambda^*$ and therefore increase power compared to equal allocation.
+	      \[
+		      \text{Power}^* = P\left(F_{4,45,\lambda^*} > F_{4,45,0;0.05}\right).
+	      \]
+
 	\item Derive an optimal allocation for the F-test of equal treatment effects, i.e, the sample size
 	      (totaling 50) that would result in the greatest power, if in reality the experiment-specific means are
 	      $\mu_1=10$ and $\tau_2 = \tau_3 = \tau_4 = \tau_5 =8$
+	      Here,
+	      \[
+		      \mu = (10, 8, 8, 8, 8).
+	      \]
+	      \[
+		      \sum_{i=1}^5 n_i = 50.
+	      \]
+	      \[
+		      \lambda = \frac{1}{\sigma^2} \sum_{i=1}^5 n_i (\mu_i - \bar{\mu})^2,
+	      \]
+	      \[
+		      \bar{\mu} = \frac{\sum n_i \mu_i}{50} = \frac{10 n_1 + 8 (50 - n_1)}{50} = 8 + \frac{2 n_1}{50} = 8 + 0.04 n_1.
+	      \]
+	      \[
+		      (\mu_1 - \bar{\mu})^2 = (10 - (8 + 0.04 n_1))^2 = (2 - 0.04 n_1)^2 = (0.04 n_1 - 2)^2.
+	      \]
+	      \[
+		      (\mu_i - \bar{\mu})^2 = (8 - (8 + 0.04 n_1))^2 = ( -0.04 n_1)^2 = 0.0016 n_1^2.
+	      \]
+
+	      \[
+		      \lambda(n_1) = \frac{1}{\sigma^2} \left[ n_1 (0.04 n_1 - 2)^2 + (50 - n_1) \times 0.0016 n_1^2 \right].
+	      \]
+	      \[
+		      \lambda(n_1) = \frac{1}{4} \left[ n_1 (0.04 n_1 - 2)^2 + (50 - n_1) 0.0016 n_1^2 \right].
+	      \]
+
+	      \[
+		      (0.04 n_1 - 2)^2 = 0.0016 n_1^2 - 0.16 n_1 + 4,
+	      \]
+	      \[
+		      \lambda(n_1) = \frac{1}{4} \left[ n_1 (0.0016 n_1^2 - 0.16 n_1 + 4) + 0.0016 n_1^2 (50 - n_1) \right].
+	      \]
+	      \[
+		      = \frac{1}{4} \left[0.0016 n_1^3 - 0.16 n_1^2 + 4 n_1 + 0.08 n_1^2 - 0.0016 n_1^3 \right],
+	      \]
+	      \[
+		      \lambda(n_1) = \frac{1}{4} \left(-0.16 n_1^2 + 0.08 n_1^2 + 4 n_1\right) = \frac{1}{4} \left(-0.08 n_1^2 + 4 n_1\right).
+	      \]
+	      \[
+		      \lambda(n_1) = \frac{1}{4} \left(4 n_1 - 0.08 n_1^2 \right) = n_1 - 0.02 n_1^2.
+	      \]
+	      \[
+		      \frac{d\lambda}{dn_1} = 1 - 0.04 n_1.
+	      \]
+	      \[
+		      1 - 0.04 n_1 = 0 \implies n_1 = \frac{1}{0.04} = 25.
+	      \]
+	      \[
+		      \frac{d^2\lambda}{dn_1^2} = -0.04 < 0,
+	      \]
+	      \[
+		      n_1^* = 25, \quad n_2^* + n_3^* + n_4^* + n_5^* = 25.
+	      \]
+	      \[
+		      n_2^* = n_3^* = n_4^* = n_5^* = \frac{25}{4} = 6.25.
+	      \]
 \end{enumerate}
 
 % Homework problem 6
@@ -355,20 +529,50 @@ answer this question, we will do it similar as the provided example and code.
 
 \begin{enumerate}
 	\item Calculate the overall mean.
+	      \[
+		      \bar{\mu} = \frac{1.5 + 2 + 1 - 1.5 - 3}{5} = 0
+	      \]
 	\item Calculate the non-centrality parameter. Hint: The non-centrality parameter
 	      should be a function of $n$.
+	      \[
+		      \lambda^2 = \frac{n \cdot 18.5}{\sigma^2} = \frac{18.5n}{25} = 0.74n
+	      \]
 	\item Find the critical value at the $5\%$ level. Note that the degrees of freedom should be a function of the
 	      sample size $n$ as well.
+	      \[
+		      df_2 = 5(n - 1) = 5 \cdot 18 = 90
+	      \]
+	      \[
+		      \lambda^2 = 0.74 \cdot 19 = 14.06
+	      \]
+	      \[
+		      F_{\text{crit}} = F_{0.95}(4, 90) = 2.4697
+	      \]
 	\item Compute the power for each sample size $n$, i.e., $n=2,3,4,\ldots,n_{min}$
 	      where $n{min}$ is the minimum sample size such that power $\ge 0.95$.
+	      \[
+		      n_{\min} = 19
+	      \]
+	      \[
+		      \text{Power} = P(F > 2.4697 \mid H_1) = 0.9501
+	      \]
 	\item Use the following code to show your figure. This code will create the same figure in this document, but you
 	      must modify it to include your information.
 \end{enumerate}
 
-\begin{rbox}[Example Code]
-	\inputminted{r}{code/prob6.R}
-\end{rbox}
-
+\begin{pythonbox}[Implementacion de los metodos]
+	\inputminted{python}{code/prob6.py}
+\end{pythonbox}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{assets/prob6a.png}
+	\caption{Comparison of the central (solid red) and non-central (dashed blue) $F$-distribution.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{assets/prob6b.png}
+	\caption{Comparison of the central (solid red) and non-central (dashed blue) $F$-distribution.}
+\end{figure}
 % Homework problem 7
 \section{problem 7}
 The entire class of ESMA 6616 wanted to study how the power of the F -test changes with the
@@ -454,11 +658,49 @@ answer this question, we will do it similar as the provided example and code.
 
 \begin{enumerate}
 	\item Calculate the overall mean.
+	      \[
+		      \bar{\mu} = \frac{\sum_{i=1}^{5} n_i \mu_i}{\sum_{i=1}^{5} n_i}
+	      \]
 	\item Calculate the non-centrality parameter. (Note: it should be a function of $n$).
+	      \[
+		      \lambda^2 = \frac{\sum_{i=1}^{5} n_i (\mu_i - \bar{\mu})^2}{\sigma^2}
+	      \]
 	\item Find the critical value at the $5\%$ level. Note that the degrees of freedom should be a function of the
 	      sample size $n$ as well.
+	      \[
+		      F^\star \sim F_{4,35}(\lambda^2 = 0) \quad \text{under } H_0
+	      \]
+	      \[
+		      F^\star \sim F_{4,35}(\lambda^2 = 15.3222) \quad \text{under } H_1
+	      \]
+	      At $\alpha = 0.05$, the critical value is:
+	      \[
+		      F_{4,35;0.95} = 2.6415
+	      \]
+
+	      \paragraph{Power:}
+	      \[
+		      P(F^\star > 2.6415 \mid H_1) = 0.8489
+	      \]
 	\item Compute the power for each sample size $n$, i.e., $n=2,3,4,\ldots,n_{min}$
 	      where $n{min}$ is the minimum sample size such that power $\ge 0.95$.
+	      \[
+		      P(F^\star > 2.6415 \mid H_1) = 0.8489
+	      \]
+
 	\item se the provided R code to produce your figure. Modify the code to include your information
 \end{enumerate}
+\begin{pythonbox}[Implementacion de los metodos]
+	\inputminted{python}{code/prob7.py}
+\end{pythonbox}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{assets/prob7a.png}
+	\caption{Comparison of the central (solid red) and non-central (dashed blue) $F$-distribution.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{assets/prob7b.png}
+	\caption{Comparison of the central (solid red) and non-central (dashed blue) $F$-distribution.}
+\end{figure}
 \end{document}
