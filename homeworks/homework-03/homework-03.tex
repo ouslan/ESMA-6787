@@ -198,15 +198,24 @@ A student commented in a discussion group: ”Random permutations are used to as
 to experimental units with a randomized block design just as with a completely randomized design.
 Hence, there is no basic difference between these two designs.” Comment.
 
+\textbf{Answer:}The assignment may be the same but the structure is different given that the data is partitioned
+in section or "blocks". This reduces the variance at the cost of power
+
 \section{Problem 3}
 Five treatments are studied in an experiment with a randomized complete block design using four
 blocks. Obtain randomized assignments of treatments to experimental units
+
+\textbf{Answer:}This should comprise of 4 block with 5 entities each receiving on of the treatments. All of the treatments
+should be present in each block (assuming it a balance block design). This should total to 20 observations
 
 \section{Problem 4}
 Two treatments and a control are studied in an experiment with a randomized block design. Five
 blocks are employed, each containing four experimental units. In each block. Each treatment is to
 be assigned to one experimental unit, and the control is to be assigned to two experimental units.
 Obtain randomized assignments of treatments to experimental units
+
+\textbf{Answer:} Each block should contain 4 observations where we will assign randomly the 2 treatments
+the rest of the observations should then be the controls.
 
 \section{Problem 5}
 An accounting firm, prior to introducing in the firm widespread training in statistical sampling for
@@ -220,6 +229,8 @@ for each auditor. The results were (block 1 consists of auditors graduated most 
 consists of those graduated most distantly):
 \begin{enumerate}
 	\item Why do you think the blocking variable ”time elapsed since college graduation” was employed?
+	      \textbf{Answer:} This is to control for experience as people who have spend more time since graduation
+	      are more likely to have more experience and hence more likely to preform better in the tests
 	\item Consider the following linear model with blocking effects.
 	      $$
 		      y= X_1 \theta + X_2 \tau + \epsilon
