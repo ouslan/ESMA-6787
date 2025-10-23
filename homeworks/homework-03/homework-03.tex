@@ -1,0 +1,371 @@
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,mathrsfs}
+\usepackage{xparse}
+\usepackage[inline,shortlabels]{enumitem}
+\setlist{topsep=2pt,itemsep=2pt,parsep=0pt,partopsep=0pt}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,top=0.5in,bottom=0.2in,left=0.5in,right=0.5in,footskip=0.3in,includefoot]{geometry}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{minted} % tcolorbox minted library, required to use the "minted" tcb listing engine (this library is not loaded by the option [most])
+\usepackage{minted} % Allows input of raw code, such as Python code
+% \usepackage[colorlinks]{hyperref}
+
+
+\usetikzlibrary{automata,positioning}
+
+\tcbset{
+    pythoncodebox/.style={
+        enhanced jigsaw,breakable,
+        colback=gray!10,colframe=gray!20!black,
+        boxrule=1pt,top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top left,
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolframe] (frame.south west)
+                --([yshift=-4pt]frame.north west)
+                to[out=90,in=180] ([xshift=4pt]frame.north west)
+                --([xshift=-8pt]frame.north east)
+                to[out=0,in=180] ([xshift=16pt]frame.south east)
+                --cycle;
+            }
+        },
+        title={#1}, % Argument of pythoncodebox specifies the title
+        fonttitle=\sffamily\bfseries
+    },
+    pythoncodebox/.default={}, % Default is No title
+    %%% Starred version has no frame %%%
+    pythoncodebox*/.style={
+        enhanced jigsaw,breakable,
+        colback=gray!10,coltitle=gray!20!black,colbacktitle=tcbcolback,
+        frame hidden,
+        top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top text left={yshift=-1mm},
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolback] (interior.south west)
+                --([yshift=-4pt]interior.north west)
+                to[out=90,in=180] ([xshift=4pt]interior.north west)
+                --([xshift=-8pt]interior.north east)
+                to[out=0,in=180] ([xshift=16pt]interior.south east)
+                --cycle;
+            }
+        },
+        title={#1}, % Argument of pythoncodebox specifies the title
+        fonttitle=\sffamily\bfseries
+    },
+    pythoncodebox*/.default={}, % Default is No title
+}
+
+% Custom tcolorbox for Python code (not the code itself, just the box it appears in)
+\newtcolorbox{pythonbox}[1][]{pythoncodebox=#1}
+\newtcolorbox{pythonbox*}[1][]{pythoncodebox*=#1} % Starred version has no frame
+
+\tcbset{
+    rcodebox/.style={
+        enhanced jigsaw,breakable,
+        colback=blue!5,colframe=blue!40!black,
+        boxrule=1pt,top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top left,
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolframe] (frame.south west)
+                --([yshift=-4pt]frame.north west)
+                to[out=90,in=180] ([xshift=4pt]frame.north west)
+                --([xshift=-8pt]frame.north east)
+                to[out=0,in=180] ([xshift=16pt]frame.south east)
+                --cycle;
+            }
+        },
+        title={#1},
+        fonttitle=\sffamily\bfseries
+    },
+    rcodebox/.default={}, % Default title = none
+    % Starred version has no frame
+    rcodebox*/.style={
+        enhanced jigsaw,breakable,
+        colback=blue!5,coltitle=blue!40!black,colbacktitle=tcbcolback,
+        frame hidden,
+        top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top text left={yshift=-1mm},
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolback] (interior.south west)
+                --([yshift=-4pt]interior.north west)
+                to[out=90,in=180] ([xshift=4pt]interior.north west)
+                --([xshift=-8pt]interior.north east)
+                to[out=0,in=180] ([xshift=16pt]interior.south east)
+                --cycle;
+            }
+        },
+        title={#1},
+        fonttitle=\sffamily\bfseries
+    },
+    rcodebox*/.default={}, % Default title = none
+}
+
+% Custom tcolorbox environments
+\newtcolorbox{rbox}[1][]{rcodebox=#1}
+\newtcolorbox{rbox*}[1][]{rcodebox*=#1}
+
+% Basic Document Settings
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+\setlength\parindent{0pt}
+
+% Homework Details
+\newcommand{\hmwkTitle}{Asignacion 3}
+\newcommand{\hmwkDueDate}{Octubre 24, 2025}
+\newcommand{\hmwkClass}{ESMA 6787}
+\newcommand{\hmwkClassInstructor}{Israel Almodovar}
+\newcommand{\hmwkAuthorName}{\textbf{Alejandro Ouslan}}
+
+% Title Page
+\title{
+	\vspace{2in}
+	\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+	\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+	\vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+	\vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+
+% Begin document
+\begin{document}
+\maketitle
+\pagebreak
+\tableofcontents
+\pagebreak
+
+% Homework problem 1
+\section{problem 1}
+Define using your own words:
+\begin{enumerate}
+	\item Estimate $c'\beta$:
+	      \[
+		      \begin{split}
+			      Y = X\beta + \epsilon      \\
+			      \hat{beta} = (X'X)^{-1}X'Y \\
+			      \hat{c'}\beta = c'\hat{beta}
+		      \end{split}
+	      \]
+	\item Power: It's the probability of correctly rejecting the null hypothesis when the alternative is true
+	\item Null hypothesis: It is the assumed reality or state of the research question
+	\item Alternative hypothesis: It is the testing question of the research
+	\item Test Statistics: it is the criteria for rejecting the null the hypothesis
+	\item Non-centrality parameter: it quantifies how much the true value of the parameter is off by
+	\item Details about the non-centrality parameter:
+\end{enumerate}
+
+\section{Problem 2}
+A student commented in a discussion group: ”Random permutations are used to assign treatments
+to experimental units with a randomized block design just as with a completely randomized design.
+Hence, there is no basic difference between these two designs.” Comment.
+
+\section{Problem 3}
+Five treatments are studied in an experiment with a randomized complete block design using four
+blocks. Obtain randomized assignments of treatments to experimental units
+
+\section{Problem 4}
+Two treatments and a control are studied in an experiment with a randomized block design. Five
+blocks are employed, each containing four experimental units. In each block. Each treatment is to
+be assigned to one experimental unit, and the control is to be assigned to two experimental units.
+Obtain randomized assignments of treatments to experimental units
+
+\section{Problem 5}
+An accounting firm, prior to introducing in the firm widespread training in statistical sampling for
+auditing. Tested three training methods: (1) study at home with programmed training materials.
+(2) training sessions at local offices conducted by local staff, and (3) training sessions in Chicago
+conducted by national staff. Thirty auditors were grouped into 10 blocks of three. According to
+time elapsed since college graduation. And the auditors in each block were randomly assigned to the
+three training methods. At the end of the training, each auditor was asked to analyze a complex
+case involving statistical applications; a proficiency measure based on this analysis was obtained
+for each auditor. The results were (block 1 consists of auditors graduated most recently, block 10
+consists of those graduated most distantly):
+\begin{enumerate}
+	\item Why do you think the blocking variable ”time elapsed since college graduation” was employed?
+	\item Consider the following linear model with blocking effects.
+	      $$
+		      y= X_1 \theta + X_2 \tau + \epsilon
+	      $$
+	      Explain each of the terms carefully in context of the problem
+	\item Write the design matrix $X_1$.
+	\item Write the design matrix $X_2$.
+	\item obtain a estimate for the treatment effects $\hat{\tau}$.
+	\item Obtain the analysis of variance table.
+	\item Report the value of the estimated mean square error.
+	\item Test whether the mean proficiency is the same for the three training methods. Use a level of significance
+	      $\alpha = 0.05$. State the alternative, decision rule, and conclusion. What is the p-value of the test?
+	\item Make all pairwise comparisons between the training method means; use the Tukey procedure with a 90\% family
+	      confidence coefficient. State your findings.
+	\item Test whether or not blocking effects are present; use $\alpha 0.05$. State the alternative, decision rule,
+	      conclusion. What is the p-value of the test?
+	\item How effective was the use of the blocking variable as compared to a completely randomized design?
+\end{enumerate}
+\begin{table}[!ht]
+	\centering
+	\caption{Training Methods Data}
+	\begin{tabular}{c c c c}
+		\hline
+		\textbf{Block i} & \textbf{Training Method (1)} & \textbf{Training Method (2)} & \textbf{Training Method (3)} \\
+		\hline
+		1                & 73                           & 81                           & 92                           \\
+		2                & 76                           & 78                           & 89                           \\
+		3                & 72                           & 80                           & 87                           \\
+		4                & 74                           & 79                           & 90                           \\
+		5                & 76                           & 71                           & 88                           \\
+		6                & 75                           & 75                           & 86                           \\
+		7                & 68                           & 72                           & 88                           \\
+		8                & 72                           & 84                           & 87                           \\
+		9                & 65                           & 73                           & 81                           \\
+		10               & 62                           & 69                           & 78                           \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{Problem 6}
+An anesthesiologist made a comparative study of the effects of acupuncture and codeine on post-
+operative dental pain in male subjects. The four treatments were: (1) placebo treatment-a sugar
+capsule and two inactive acupuncture points $(A_1B_1)$, (2) codeine treatment only-a codeine cap-
+sale and two inactive acupuncture points $(A_2B_1)$, (3) acupuncture treatment only-a sugar capsule
+and two active acupuncture points $(A_1B_2)$ and (4) codeine and acupuncture treatment-a codeine
+capsule and two active acupuncture points $(A_2B_2)$. Thirty-two subjects were grouped into eight
+blocks or four according to an initial evaluation of their level of pain tolerance. The subjects in
+each block were then randomly assigned to the four treatments. Pain relief scores were obtained
+for all subjects two hours after dental treatment. Data were collected on a double-blind basis.
+
+\begin{enumerate}
+	\item Why do you think that pain tolerance of the subjects was used as a blocking variable?
+	\item Which of the assumptions involved in randomized block model are you most concerned with here?
+	\item Consider the following linear model with blocking effects.
+	      $$
+		      y=X_1 \theta + X_2 \tau + \epsilon
+	      $$
+	      Explain each of the terms carefully in context of the problem
+	\item Write the design matrix $X_1$
+	\item Write the design matrix $X_2$.
+	\item Obtain a estimate for the treatment effects $\hat{\tau}$.
+	\item Obtain the residuals for a randomized block model and plot them against the fitted values.
+	      What are you findings?
+	\item Obtain the analysis of variance table.
+	\item Prepare separate bar-interval graphs for each set of estimated factor level means using 95\%
+	      confidence intervals. Does it appear that substantial main effects are present here? Hint: you
+	      can consider the TukeyHSD() function R for this type of plot.
+	\item Test whether main effects are present for each of the factors; use $\alpha = 0.01$ for each test. State
+	      the alternatives, decision rule, and conclusion for each test. What is the p-value of each test?
+	\item Estimate
+	      $$
+		      \mu_1 - mu_2 = \alpha_1 - \alpha_2
+	      $$
+	      $$
+		      \mu_1 - \mu_2 = \beta_1 - \beta_2
+	      $$
+\end{enumerate}
+
+\section{Problem 7}
+A manufacturer conducted a small pilot study of the effect of the price of one of its products on
+sales of this product in hardware stores. Since it might be confusing to customers if prices were
+switched repeatedly within a store, only one price was used for anyone store during the six-month
+study period. Sixteen stores were employed in the study. To reduce experimental error variability,
+stores were chosen so that there would be one store for each sales volume-geographic location class.
+The four price levels (A: \$1.79; B: \$1.69; C: \$1.59; D: \$1.49) were assigned to the stores according
+to the latin square design shown below. Data on sales during the six-month period (in thousand
+dollars)
+
+\begin{table}[h!]
+	\centering
+	\caption{Sales Volume and Geographic Location Classes}
+	\begin{tabular}{c c c c c}
+		\hline
+		\textbf{Sales Volume Class (i)} & \textbf{Northeast} & \textbf{Northwest} & \textbf{Southeast} & \textbf{Southwest} \\
+		\hline
+		1 (smallest)                    & 1.2 (B)            & 1.5 (C)            & 1.0 (A)            & 1.7 (D)            \\
+		2                               & 1.4 (A)            & 1.9 (D)            & 1.6 (B)            & 1.5 (C)            \\
+		3                               & 2.8 (C)            & 2.1 (B)            & 2.7 (D)            & 2.0 (A)            \\
+		4 (largest)                     & 3.4 (D)            & 2.5 (A)            & 2.9 (C)            & 2.7 (B)            \\
+		\hline
+	\end{tabular}
+\end{table}
+
+
+\begin{enumerate}
+	\item Prepare a main effects plot of the estimated treatment means. What does the plot suggest about the effects of the
+	      four price levels on sales?
+	\item Test whether or not price level affects mean sales; use $\alpha = 0.05$. State the alternative,
+	      decision rule, and conclusion. What is the p-value of the test?
+	\item Analyse the nature of the price effect: on sales by making all pairwise comparisons amour the treatment means.
+	      Use the Tukey procedure and a 90\% family confidence coefficient Summarize your findings.
+	\item Does there appear to be a linear relationship between price level and mean sales? Could you formally test for linearity
+	      Explain
+\end{enumerate}
+
+\section{Problem 8}
+pilot study was undertaken on the interaction effect, of two drugs to stimulate growth in girls
+who are of short stature because of a particular syndrome. Each drug was known to be modestly
+effective singly, but the combination of the two drugs had never been investigated. Blocking by both
+subject and time period was desired whereby repeated measures for different treatments applied
+to the same subject are obtained. A $4 \times 4$ latin square design, shown below, was utilized for four
+subjects, four time periods, and four treatments. The four time periods consisted of one month
+each, separated by an intervening month during which no treatment was given. The four treatments
+were A: no treatment (placebo); B: drug X alone; C: drug Y alone; D: both drugs X and Y .
+The response variable was the difference in the growth rates (in centimeters per month) during the
+treatment period and the base period before the experiment began
+
+Asume that an appropriate model is the latin square model.
+\begin{enumerate}
+	\item State the model to be eployed.
+	\item State the ANOVA skeleton (source and degrees-of freedom)
+	\item Test for difference of effects between the two drugs; use $\alpha =0.05$. State the alternatives,
+	      decision rule, and conclusion. What is the p-value of the test?
+\end{enumerate}
+
+\section{Problem 9}
+An investigator wishes to design an experiment to compare three treatments using a CBD (of three
+units per block). From long experience with similar experiments, he knows that $\sigma^2$ will be very
+close to 2.4. He believes that there really is no difference between treatments 1 and 2, but that
+treatment 3 produces responses about 0.6 larger, on average, than these. Assuming this is true:
+
+\begin{enumerate}
+	\item How many blocks should be included in the design to provide power of 0.8 for testing
+	      $H_0: \tau_1 = \tau_2 = \tau_3$ with type I error probability of 0.05?
+	\item If $b=10$ blocks are used, what will be the expected squared length of a 95\% confidence interval
+	      for $\frac{\tau_1 + \tau_2}{2-\tau_3}$?
+\end{enumerate}
+
+\end{document}
