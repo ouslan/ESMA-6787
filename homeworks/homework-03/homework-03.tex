@@ -238,12 +238,12 @@ consists of those graduated most distantly):
 	      $$
 	      Explain each of the terms carefully in context of the problem
 	      \begin{enumerate}
-		      \item $y$: I the response vector
-		      \item $X_1$ is the treatment effects data
-		      \item $X_2$: is the block effects data
+		      \item $y$: Is the scores reported
+		      \item $X_1$ is the treatment effects matrix for the training sessions
+		      \item $X_2$: is the block effects matrix for the groups
 		      \item $\theta$: is the treatment effect coefficient
 		      \item $\tau$: is the block effects coefficient
-		      \item $\epsilon$: is the error term
+		      \item $\epsilon$: is the error term o unobserved effects
 	      \end{enumerate}
 	\item Write the design matrix $X_1$.
 	      $$
@@ -354,30 +354,120 @@ for all subjects two hours after dental treatment. Data were collected on a doub
 
 \begin{enumerate}
 	\item Why do you think that pain tolerance of the subjects was used as a blocking variable?
+
+	      \textbf{Answer:} This is likely to control for people that would be unable to feel the needle due to there
+	      high pain tolerance
 	\item Which of the assumptions involved in randomized block model are you most concerned with here?
+
+	      \textbf{Answer:} There are no initial problem with the design at the moment. The only concern might be an interaction with the treatments
+	      and the blocks
+
 	\item Consider the following linear model with blocking effects.
 	      $$
 		      y=X_1 \theta + X_2 \tau + \epsilon
 	      $$
 	      Explain each of the terms carefully in context of the problem
+	      \begin{enumerate}
+		      \item $y$: Is the pain relief scores reported
+		      \item $X_1$ is the treatment effects matrix for the acupuncture
+		      \item $X_2$: is the block effects matrix for the groups
+		      \item $\theta$: is the treatment effect coefficient
+		      \item $\tau$: is the block effects coefficient
+		      \item $\epsilon$: is the error term o unobserved effects
+	      \end{enumerate}
 	\item Write the design matrix $X_1$
+	      $$
+		      X_1 = I_{8} \otimes \begin{bmatrix}
+			      1 & 0 \\
+			      1 & 0 \\
+			      0 & 1 \\
+			      0 & 1
+		      \end{bmatrix}
+	      $$
+
 	\item Write the design matrix $X_2$.
+	      $$
+		      X_2 = I_{8} \otimes \begin{bmatrix}
+			      1 & 0 \\
+			      0 & 1 \\
+			      1 & 0 \\
+			      0 & 1
+		      \end{bmatrix}
+	      $$
 	\item Obtain a estimate for the treatment effects $\hat{\tau}$.
+
+	      \begin{tabular}{llrrl}
+		      \toprule
+		      Drug    & Acupuncture & Predicted Mean & $\hat{\tau}$ & Interpretation                  \\
+		      \midrule
+		      Placebo & Inactive    & 0.01875        & 0.00000      & Baseline                        \\
+		      Placebo & Active      & 0.59375        & 0.57500      & Effect of Acupuncture (Placebo) \\
+		      Codeine & Inactive    & 0.48125        & 0.00000      & Effect of Codeine (Inactive)    \\
+		      Codeine & Active      & 1.20625        & 0.72500      & Combined Effect                 \\
+		      \bottomrule
+	      \end{tabular}
+
 	\item Obtain the residuals for a randomized block model and plot them against the fitted values.
 	      What are you findings?
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.5\textwidth]{assets/residuals.png}
+		      \caption{Comparison of the central (solid red) and non-central (dashed blue) $F$-distribution.}
+	      \end{figure}
 	\item Obtain the analysis of variance table.
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA Table for Randomized Block Design}
+		      \begin{tabular}{lrrrr}
+			      \toprule
+			      \textbf{Source}        & \textbf{Sum of Squares} & \textbf{df} & \textbf{F} & \textbf{p-value}     \\
+			      \midrule
+			      C(Drug)                & 2.31125                 & 1           & 159.79     & $2.77\times10^{-11}$ \\
+			      C(Acupuncture)         & 3.38000                 & 1           & 233.68     & $7.47\times10^{-13}$ \\
+			      C(Block)               & 5.59875                 & 7           & 55.30      & $4.13\times10^{-12}$ \\
+			      C(Drug):C(Acupuncture) & 0.04500                 & 1           & 3.11       & $9.23\times10^{-2}$  \\
+			      Residual               & 0.30375                 & 21          & --         & --                   \\
+			      \bottomrule
+		      \end{tabular}
+	      \end{table}
+
 	\item Prepare separate bar-interval graphs for each set of estimated factor level means using 95\%
 	      confidence intervals. Does it appear that substantial main effects are present here? Hint: you
 	      can consider the TukeyHSD() function R for this type of plot.
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.5\textwidth]{assets/interaction6.png}
+		      \caption{Interaction Graph}
+	      \end{figure}
 	\item Test whether main effects are present for each of the factors; use $\alpha = 0.01$ for each test. State
 	      the alternatives, decision rule, and conclusion for each test. What is the p-value of each test?
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{Hypothesis Tests for Main Effects ($\alpha = 0.01$)}
+		      \begin{tabular}{lcccc}
+			      \toprule
+			      \textbf{Factor}           & \textbf{F} & \textbf{p-value}     & \textbf{Decision}    & \textbf{Conclusion}        \\
+			      \midrule
+			      Drug                      & 159.79     & $2.77\times10^{-11}$ & Reject $H_0$         & Significant main effect    \\
+			      Acupuncture               & 233.68     & $7.47\times10^{-13}$ & Reject $H_0$         & Significant main effect    \\
+			      Block                     & 55.30      & $4.13\times10^{-12}$ & Reject $H_0$         & Significant block effect   \\
+			      Drug $\times$ Acupuncture & 3.11       & 0.092                & Fail to reject $H_0$ & No significant interaction \\
+			      \bottomrule
+		      \end{tabular}
+	      \end{table}
 	\item Estimate
 	      $$
 		      \mu_1 - mu_2 = \alpha_1 - \alpha_2
 	      $$
+
 	      $$
 		      \mu_1 - \mu_2 = \beta_1 - \beta_2
 	      $$
+	      \begin{align*}
+		      \hat{\alpha}_1 - \hat{\alpha}_2 & = 0.4625 \\
+		      \hat{\beta}_1 - \hat{\beta}_2   & = 0.5750
+	      \end{align*}
+
 \end{enumerate}
 
 \section{Problem 7}
