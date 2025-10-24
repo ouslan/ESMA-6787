@@ -229,6 +229,7 @@ for each auditor. The results were (block 1 consists of auditors graduated most 
 consists of those graduated most distantly):
 \begin{enumerate}
 	\item Why do you think the blocking variable ”time elapsed since college graduation” was employed?
+
 	      \textbf{Answer:} This is to control for experience as people who have spend more time since graduation
 	      are more likely to have more experience and hence more likely to preform better in the tests
 	\item Consider the following linear model with blocking effects.
@@ -236,18 +237,88 @@ consists of those graduated most distantly):
 		      y= X_1 \theta + X_2 \tau + \epsilon
 	      $$
 	      Explain each of the terms carefully in context of the problem
+	      \begin{enumerate}
+		      \item $y$: I the response vector
+		      \item $X_1$ is the treatment effects data
+		      \item $X_2$: is the block effects data
+		      \item $\theta$: is the treatment effect coefficient
+		      \item $\tau$: is the block effects coefficient
+		      \item $\epsilon$: is the error term
+	      \end{enumerate}
 	\item Write the design matrix $X_1$.
+	      $$
+		      X_1 =\mathbf{1}_{10} \otimes I_3
+	      $$
+
 	\item Write the design matrix $X_2$.
+	      $$
+		      X_2 = I_{10} \otimes \mathbf{1}_3
+	      $$
 	\item obtain a estimate for the treatment effects $\hat{\tau}$.
+	      $$
+		      \hat{\tau} = \begin{bmatrix}
+			      4.9  \\
+			      15.3 \\
+		      \end{bmatrix}
+	      $$
+
 	\item Obtain the analysis of variance table.
+	      \[
+		      \begin{array}{lrrrr}
+			      \hline
+			      \text{Source}   & \text{Sum of Squares (SS)} & \text{df} & F      & \text{p-value}      \\
+			      \hline
+			      \text{Block}    & 434.300                    & 9         & 5.9575 & 6.64 \times 10^{-4} \\
+			      \text{Training} & 1220.867                   & 2         & 75.362 & 1.79 \times 10^{-9} \\
+			      \text{Residual} & 145.800                    & 18        & -      & -                   \\
+			      \hline
+		      \end{array}
+	      \]
+
 	\item Report the value of the estimated mean square error.
+	      $$
+		      8.1
+	      $$
 	\item Test whether the mean proficiency is the same for the three training methods. Use a level of significance
 	      $\alpha = 0.05$. State the alternative, decision rule, and conclusion. What is the p-value of the test?
+	      $$
+		      F= 75.362, \quad p-value = 1.79 \times 10^{-9}
+	      $$
 	\item Make all pairwise comparisons between the training method means; use the Tukey procedure with a 90\% family
 	      confidence coefficient. State your findings.
+
+	      \[
+		      \begin{array}{lrrrrrr}
+			      \hline
+			      \text{Comparison}           & \text{Mean Difference} & p\text{-adj} & \text{Lower 90\% CI} & \text{Upper 90\% CI} & \text{Reject } H_0? \\
+			      \hline
+			      \text{Method 1 vs Method 2} & 4.9                    & 0.0639       & 0.458                & 9.342                & \text{Yes}          \\
+			      \text{Method 1 vs Method 3} & 15.3                   & 0.0000       & 10.858               & 19.742               & \text{Yes}          \\
+			      \text{Method 2 vs Method 3} & 10.4                   & 0.0001       & 5.958                & 14.842               & \text{Yes}          \\
+			      \hline
+		      \end{array}
+	      \]
+
+	      \textbf{Interpretation:}
+
+	      \begin{itemize}
+		      \item Training Method 3 has the highest mean proficiency and is significantly better than both Methods 1 and 2.
+		      \item Training Method 2 shows a moderate improvement over Method 1, which is significant at the 90\% confidence level.
+		      \item Therefore, all pairwise differences between training methods are statistically significant at the chosen family-wise confidence level, confirming that the training methods differ in their effectiveness.
+	      \end{itemize}
+
 	\item Test whether or not blocking effects are present; use $\alpha 0.05$. State the alternative, decision rule,
 	      conclusion. What is the p-value of the test?
+	      $$
+		      p-value = 6.64 \times 10^{-4}
+	      $$
+	      There is a blocking effect
 	\item How effective was the use of the blocking variable as compared to a completely randomized design?
+	      $$
+		      \frac{MSE_{CRD}-MSE_{Block}}{MSE_{CRD}}\approx 0.623
+	      $$
+
+	      It's around 62\% better
 \end{enumerate}
 \begin{table}[!ht]
 	\centering
@@ -319,7 +390,7 @@ The four price levels (A: \$1.79; B: \$1.69; C: \$1.59; D: \$1.49) were assigned
 to the latin square design shown below. Data on sales during the six-month period (in thousand
 dollars)
 
-\begin{table}[h!]
+\begin{table}[!ht]
 	\centering
 	\caption{Sales Volume and Geographic Location Classes}
 	\begin{tabular}{c c c c c}
@@ -358,7 +429,7 @@ were A: no treatment (placebo); B: drug X alone; C: drug Y alone; D: both drugs 
 The response variable was the difference in the growth rates (in centimeters per month) during the
 treatment period and the base period before the experiment began
 
-\begin{table}[h!]
+\begin{table}[!ht]
 	\centering
 	\caption{Subject Data}
 	\begin{tabular}{c c c c c}
