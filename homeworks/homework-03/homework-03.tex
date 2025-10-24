@@ -499,16 +499,68 @@ dollars)
 \begin{enumerate}
 	\item Prepare a main effects plot of the estimated treatment means. What does the plot suggest about the effects of the
 	      four price levels on sales?
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.5\textwidth]{assets/price_plot.png}
+		      \caption{Interaction Graph}
+	      \end{figure}
+	      Higher prices tend to correspond to higher sales,
+	      \pagebreak
 	\item Test whether or not price level affects mean sales; use $\alpha = 0.05$. State the alternative,
 	      decision rule, and conclusion. What is the p-value of the test?
+	      \[
+		      H_0: \mu_A = \mu_B = \mu_C = \mu_D
+	      \]
+
+	      \[
+		      H_1: \text{At least one } \mu \text{ differs}
+	      \]
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA Table for Sales Data}
+		      \begin{tabular}{lccccc}
+			      \toprule
+			      Source            & Sum of Squares & df & Mean Square & F       & p-value  \\
+			      \midrule
+			      Price             & 1.136875       & 3  & 0.378958    & 19.147  & 0.001783 \\
+			      Volume (Row)      & 5.981875       & 3  & 1.993958    & 100.747 & 0.000016 \\
+			      Location (Column) & 0.121875       & 3  & 0.040625    & 2.053   & 0.208094 \\
+			      Residual          & 0.118750       & 6  & 0.019792    & --      & --       \\
+			      \bottomrule
+		      \end{tabular}
+	      \end{table}
+	      Since $F_0 > F_{\text{critical}}$ and $p < 0.05$, we reject $H_0$. There is strong evidence that the price level affects mean sales.
 	\item Analyse the nature of the price effect: on sales by making all pairwise comparisons amour the treatment means.
 	      Use the Tukey procedure and a 90\% family confidence coefficient Summarize your findings.
+	      \begin{table}[h!]
+		      \centering
+		      \caption{Pairwise Comparisons of Mean Sales by Price}
+		      \begin{tabular}{lcccccc}
+			      \toprule
+			      Group 1 & Group 2 & Mean Diff & p-value & Lower   & Upper  & Reject $H_0$ \\
+			      \midrule
+			      A       & B       & 0.175     & 0.9854  & -1.1286 & 1.4786 & No           \\
+			      A       & C       & 0.45      & 0.8133  & -0.8536 & 1.7536 & No           \\
+			      A       & D       & 0.7       & 0.537   & -0.6036 & 2.0036 & No           \\
+			      B       & C       & 0.275     & 0.9475  & -1.0286 & 1.5786 & No           \\
+			      B       & D       & 0.525     & 0.7352  & -0.7786 & 1.8286 & No           \\
+			      C       & D       & 0.25      & 0.9596  & -1.0536 & 1.5536 & No           \\
+			      \bottomrule
+		      \end{tabular}
+	      \end{table}
+	      \begin{itemize}
+		      \item None of the pairwise comparisons of price levels are statistically significant at this confidence level.
+		      \item This indicates that, after adjusting for multiple comparisons, no single price level differs significantly from another in terms of mean sales.
+	      \end{itemize}
 	\item Does there appear to be a linear relationship between price level and mean sales? Could you formally test for linearity
-	      Explain
+
+	      \textbf{Answer:} There are not enough data points to state reasonably that there is a linear relationship. Economic theory would say that it depends on the
+	      elasticity (price sensitivity) of demand (product sales). Good that are imperfect competition are have non linear relationships till a maximum where consumers
+	      reach maximum utility when prices are near 0 and a demand of 0 when the prices are too high
 \end{enumerate}
 
 \section{Problem 8}
-pilot study was undertaken on the interaction effect, of two drugs to stimulate growth in girls
+A pilot study was undertaken on the interaction effect, of two drugs to stimulate growth in girls
 who are of short stature because of a particular syndrome. Each drug was known to be modestly
 effective singly, but the combination of the two drugs had never been investigated. Blocking by both
 subject and time period was desired whereby repeated measures for different treatments applied
