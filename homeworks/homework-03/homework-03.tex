@@ -587,10 +587,44 @@ treatment period and the base period before the experiment began
 \end{table}
 Asume that an appropriate model is the latin square model.
 \begin{enumerate}
-	\item State the model to be eployed.
+	\item State the model to be employed.
+	      \begin{equation}
+		      Y_{ijk} = \mu + \alpha_i + \beta_j + \gamma_k + \epsilon_{ijk}, \quad i,j,k = 1,2,3,4
+	      \end{equation}
+
+	      \noindent where:
+	      \begin{align*}
+		      Y_{ijk}        & \text{ = observed growth rate for subject } i \text{ in period } j \text{ receiving treatment } k, \\
+		      \mu            & \text{ = overall mean growth rate},                                                                \\
+		      \alpha_i       & \text{ = effect of subject } i \text{ (row effect)},                                               \\
+		      \beta_j        & \text{ = effect of period } j \text{ (column effect)},                                             \\
+		      \gamma_k       & \text{ = effect of treatment } k \text{ (A, B, C, D)},                                             \\
+		      \epsilon_{ijk} & \sim N(0, \sigma^2) \text{ = random error term}.
+	      \end{align*}
 	\item State the ANOVA skeleton (source and degrees-of freedom)
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA Table for the Latin Square Model}
+		      \begin{tabular}{lccccc}
+			      \hline
+			      \textbf{Source} & \textbf{Sum of Squares} & \textbf{df} & \textbf{F} & \textbf{p-value} \\
+			      \hline
+			      Subject         & 0.336                   & 3           & 2.45       & 0.165            \\
+			      Period          & 0.084                   & 3           & 0.61       & 0.639            \\
+			      Treatment       & 0.482                   & 3           & 3.50       & 0.081            \\
+			      Residual        & 0.276                   & 6           &            &                  \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
+
 	\item Test for difference of effects between the two drugs; use $\alpha =0.05$. State the alternatives,
 	      decision rule, and conclusion. What is the p-value of the test?
+	      \begin{align*}
+		      H_0 & : \mu_B = \mu_C \quad \text{(no difference between drug X and Y)} \\
+		      H_1 & : \mu_B \neq \mu_C \quad \text{(drug X and Y differ)}
+	      \end{align*}
+	      \textbf{Answer:} $p = 0.9076 > 0.05$, so we fail to reject $H_0$. There is no significant difference in growth effects between drug X and drug Y at $\alpha = 0.05$.
+
 \end{enumerate}
 
 \section{Problem 9}
@@ -602,8 +636,47 @@ treatment 3 produces responses about 0.6 larger, on average, than these. Assumin
 \begin{enumerate}
 	\item How many blocks should be included in the design to provide power of 0.8 for testing
 	      $H_0: \tau_1 = \tau_2 = \tau_3$ with type I error probability of 0.05?
+	      \[
+		      SS_{\text{trt}} = b \sum_{i=1}^t \tau_i^2
+	      \]
+	      \[
+		      \lambda = \frac{SS_{\text{trt}}}{\sigma^2} = \frac{b \sum_{i=1}^t \tau_i^2}{\sigma^2}
+	      \]
+	      \[
+		      \sum_{i=1}^3 \tau_i^2 = (-0.2)^2 + (-0.2)^2 + 0.4^2 = 0.04 + 0.04 + 0.16 = 0.24
+	      \]
+	      \[
+		      \lambda = \frac{b (0.24)}{2.4} = 0.1 b
+	      \]
+	      \[
+		      1-\beta \approx P\left(F_{2,\infty,\lambda} > 3.00 \right) = 0.8
+	      \]
+	      \[
+		      \lambda = 0.1 b = 6.3 \implies b = \frac{6.3}{0.1} = 63
+	      \]
 	\item If $b=10$ blocks are used, what will be the expected squared length of a 95\% confidence interval
 	      for $\frac{\tau_1 + \tau_2}{2-\tau_3}$?
+	      \[
+		      \text{Var}(\hat L) = \frac{\sigma^2}{b} \sum_{i=1}^t c_i^2
+	      \]
+	      \[
+		      c_1 = \frac{1}{2}, \quad c_2 = \frac{1}{2}, \quad c_3 = -1
+	      \]
+	      \[
+		      \sum_{i=1}^3 c_i^2 = \left(\frac{1}{2}\right)^2 + \left(\frac{1}{2}\right)^2 + (-1)^2 = \frac{1}{4} + \frac{1}{4} + 1 = 1.5
+	      \]
+	      \[
+		      \text{Var}(\hat L) = \frac{1.5 \cdot \sigma^2}{b} = \frac{1.5 \cdot 2.4}{10} = 0.36
+	      \]
+	      \[
+		      \text{Length} \approx 2 \cdot t_{df,0.975} \cdot \sqrt{\text{Var}(\hat L)}
+	      \]
+	      \[
+		      \text{Length} \approx 2 \cdot 2 \cdot \sqrt{0.36} = 4 \cdot 0.6 = 2.4
+	      \]
+	      \[
+		      (\text{Length})^2 = 2.4^2 = 5.76
+	      \]
 \end{enumerate}
 
 \end{document}
