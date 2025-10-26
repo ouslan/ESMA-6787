@@ -213,7 +213,9 @@ levels of baking powder were tested and four replicate biscuits  were made with 
 	      \textbf{Answered:} The answer would be the same if would now have a batch effect. We could use latin squares for this experiments if it is structured in batches
 \end{enumerate}
 
-\section{Problem 3} Consider a completely randomized design with four treatment groups, in which a total of $N = 100$
+\section*{Problem 3: Rndomize grouop}
+
+Consider a completely randomized design with four treatment groups, in which a total of $N = 100$
 units are to be used. Although it won’t be explicitly used in the analysis model, treatments 1 through
 5 actually represent increasing concentrations of one component in an otherwise standard chemical
 compound, and the primary purpose of the experiment is to understand whether certain measurable
@@ -226,6 +228,58 @@ where each $\tau_i$ is a parameter in the standard effects model. Find the optim
 available units (i.e., values for $n1,\cdots, n5$) that minimizes the average variance of estimates of the five
 contrasts of interest. Do this as a constrained, continuous optimization problem, then round the solution
 to integer values that are consistent with the required constraints.
+
+Consider a completely randomized design with five treatments and a total of $N = 100$ experimental units. We are interested in the following five contrasts:
+
+\[
+	\tau_2 -\tau_1, \quad \tau_2-\tau_3, \quad \tau_2-\tau_4, \quad \tau_3 - \tau_4, \quad \tau_3-\tau_1
+\]
+
+where $\tau_i$ are the treatment effects in the standard effects model.
+
+
+\[
+	\begin{aligned}
+		\mathrm{Var}(\tau_2-\tau_1) & = \sigma^2 \left( \frac{1}{n_1} + \frac{1}{n_2} \right) \\
+		\mathrm{Var}(\tau_2-\tau_3) & = \sigma^2 \left( \frac{1}{n_2} + \frac{1}{n_3} \right) \\
+		\mathrm{Var}(\tau_2-\tau_4) & = \sigma^2 \left( \frac{1}{n_2} + \frac{1}{n_4} \right) \\
+		\mathrm{Var}(\tau_3-\tau_4) & = \sigma^2 \left( \frac{1}{n_3} + \frac{1}{n_4} \right) \\
+		\mathrm{Var}(\tau_3-\tau_1) & = \sigma^2 \left( \frac{1}{n_3} + \frac{1}{n_1} \right)
+	\end{aligned}
+\]
+\[
+	V_{\text{avg}} \propto \frac{2}{n_1} + \frac{3}{n_2} + \frac{3}{n_3} + \frac{2}{n_4}.
+\]
+
+\[
+	f(n_1,n_2,n_3,n_4) = \frac{2}{n_1} + \frac{3}{n_2} + \frac{3}{n_3} + \frac{2}{n_4}
+\]
+subject to
+\[
+	n_1 + n_2 + n_3 + n_4 + n_5 = 100, \quad n_i > 0.
+\]
+
+\[
+	n_1 = n_4 = \sqrt{\frac{2}{\lambda}}, \quad n_2 = n_3 = \sqrt{\frac{3}{\lambda}},
+\]
+\[
+	2\sqrt{\frac{2}{\lambda}} + 2\sqrt{\frac{3}{\lambda}} = 100 \implies \sqrt{\lambda} = \frac{\sqrt{2}+\sqrt{3}}{50}.
+\]
+\[
+	n_1 = n_4 \approx 22.5, \quad n_2 = n_3 \approx 27.5, \quad n_5 \approx 0.
+\]
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{cccccc}
+		\toprule
+		Treatment   & 1  & 2  & 3  & 4  & 5 \\
+		\midrule
+		Units $n_i$ & 22 & 28 & 28 & 22 & 0 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
 
 \section{Problem 4}
 
