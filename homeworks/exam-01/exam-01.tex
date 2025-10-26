@@ -396,42 +396,110 @@ treatment
 \section{Problem 5}
 An accounting firm prior to introducing in the firm widespread training in statistical sampling
 for auditing tested three training methods: (1) study at home with programmed training materials,
-(2) training sessions at local offices conducted by local staff, and (3) training sessions in Chicago con-
-ducted by national staff. Thirty auditors were grouped into 10 blocks of three according to time elapsed
+(2) training sessions at local offices conducted by local staff, and (3) training sessions in Chicago conducted
+by national staff. Thirty auditors were grouped into 10 blocks of three according to time elapsed
 since college graduation and the auditors in each block were randomly assigned to the three training
 methods. At the end of the training each auditor was asked to analyze a complex case involving statistical
 applications proficiency measure based on this analysis was obtained for each auditor.
-\begin{table}[ht]
+\begin{table}[!ht]
 	\centering
-	\caption{Training Methods}
-	\begin{tabular}{|c|c|c|c|}
+	\caption{Training Methods Data}
+	\begin{tabular}{c c c c}
 		\hline
-		\textbf{Block} & \textbf{1} & \textbf{2} & \textbf{3} \\
+		\textbf{Block i} & \textbf{Training Method (1)} & \textbf{Training Method (2)} & \textbf{Training Method (3)} \\
 		\hline
-		1              & 73         & 81         & 92         \\
-		2              & 76         & 78         & 89         \\
-		3              & 75         & 76         & 87         \\
-		4              & 74         & 77         & 90         \\
-		5              & 76         & 71         & 88         \\
-		6              & 73         & 75         & 86         \\
-		7              & 68         & 72         & 88         \\
-		8              & 64         & 74         & 82         \\
-		9              & 65         & 73         & 81         \\
-		10             & 62         & 69         & 78         \\
+		1                & 73                           & 81                           & 92                           \\
+		2                & 76                           & 78                           & 89                           \\
+		3                & 72                           & 80                           & 87                           \\
+		4                & 74                           & 79                           & 90                           \\
+		5                & 76                           & 71                           & 88                           \\
+		6                & 75                           & 75                           & 86                           \\
+		7                & 68                           & 72                           & 88                           \\
+		8                & 72                           & 84                           & 87                           \\
+		9                & 65                           & 73                           & 81                           \\
+		10               & 62                           & 69                           & 78                           \\
 		\hline
 	\end{tabular}
 \end{table}
-\pagebreak
 \begin{enumerate}[(a)]
 	\item Why do you think the blocking variable "time elapsed since college graduation" was employed?
+
+	      \textbf{Answer:} This is to control for experience as people who have spend more time since graduation
+	      are more likely to have more experience and hence more likely to preform better in the tests
 	\item  Obtain the residuals for the randomized block model and plot them against the fitted values. Also, prepare a normal probability plot of the residuals. What are your findings?
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.5\textwidth]{assets/erros.png}
+		      \caption{Interaction Graph}
+	      \end{figure}
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.5\textwidth]{assets/qqp.png}
+		      \caption{Interaction Graph}
+	      \end{figure}
+
+	      Those show that the errors comes from a normal distribution with mean 0 and contrant variance. The qqp shows that the residuals are normally distributed
+
 	\item  Plot the responses $Y_{ij}$ by blocks. What does this plot suggest about the appropriateness of the no-interaction assumption here?
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.5\textwidth]{assets/interaction.png}
+		      \caption{Interaction Graph}
+	      \end{figure}
+	      The graph shows that there is interaction between the training methods
 \end{enumerate}
 
 Assume that the randomized block model is appropriate.
 \begin{enumerate}[(a)]
 	\item Test whether or not the mean proficiency is the same for the three training methods. Use a level of significance $\alpha = 0.05$. State the alternatives, decision rule, and conclusion. What is the p-value of the test?
+	      \begin{table}[htbp]
+		      \centering
+		      \caption{ANOVA Table for Randomized Block Design}
+		      \begin{tabular}{lrrrrr}
+			      \toprule
+			                & sum\_sq  & df   & mean\_sq & F       & PR(>F) \\
+			      \midrule
+			      C(Method) & 794.9333 & 2.0  & 397.4667 & 64.4565 & 0.0000 \\
+			      C(Block)  & 579.9000 & 9.0  & 64.4333  & 10.4541 & 0.0000 \\
+			      Residual  & 111.0000 & 18.0 & 6.1667   &         &        \\
+			      \bottomrule
+		      \end{tabular}
+	      \end{table}
+	      \begin{enumerate}
+		      \item $H_0$: All treatments have the same effects
+		      \item $H_1$: At least one treatment has an effect
+	      \end{enumerate}
+
+	      Given that the p-value is near 0 we reject the null hypothesis and conclude that there is significant differences between training methods
 	\item Make all pairwise comparisons between the training method means; use the Tukey procedure with a 90\% confidence level coefficient. State your findings.
+	      \begin{table}[htbp]
+		      \centering
+		      \caption{Tukey HSD Pairwise Comparisons Among Training Methods (90\% Confidence Level)}
+		      \begin{tabular}{ccccccc}
+			      \toprule
+			      \textbf{Group 1} & \textbf{Group 2} & \textbf{Mean Diff} & \textbf{p-adj} & \textbf{Lower} & \textbf{Upper} & \textbf{Reject} \\
+			      \midrule
+			      1                & 2                & 4.9                & 0.0639         & 0.458          & 9.342          & \textbf{Yes}    \\
+			      1                & 3                & 15.3               & 0.0000         & 10.858         & 19.742         & \textbf{Yes}    \\
+			      2                & 3                & 10.4               & 0.0001         & 5.958          & 14.842         & \textbf{Yes}    \\
+			      \bottomrule
+		      \end{tabular}
+	      \end{table}
+	      \begin{enumerate}
+		      \item $H_0$: There are no differences
+		      \item $H_1$: The pair is different
+	      \end{enumerate}
+	      This table show that there are significant evidence to conclude that there is an effect on training method use and the score results. The order of the effect is
+	      studding in Chicago then studding with the local office then studying at home. Overall this results make sense, this might be due to the level effort or investment the employee feels from the company.
+
 	\item Test whether or not blocking effects are present; use \( \alpha = 0.05 \). State the alternatives, decision rule, and conclusion. What is the p-value of the test?
+	      \begin{itemize}
+		      \item \(H_0\) There is no blocking effects
+		      \item \(H_1\) There is blocking effects
+	      \end{itemize}
+
+
+	      Since the p-value is less than 0.05, we reject the null hypothesis and conclude that there is a blocking effect
+
 \end{enumerate}
 \end{document}
