@@ -125,7 +125,7 @@
 \pagebreak
 
 % Homework problem 1
-\section{problem 1}
+\section*{Problem 1: Definitions}
 Define the followings:
 \begin{enumerate}[(a)]
 	\item p-value:It is the probability that we would see that our results given that we asume that the null hypothesis is true
@@ -136,7 +136,7 @@ Define the followings:
 
 \end{enumerate}
 
-\section{Problem 2}
+\section*{Problem 2: Dough Experiment}
 In the experiment to study the effects of the amount of baking powder in a biscuit dough upon the rise heights of the biscuits, four
 levels of baking powder were tested and four replicate biscuits  were made with each level in a random order.
 \begin{table}[!ht]
@@ -155,15 +155,62 @@ levels of baking powder were tested and four replicate biscuits  were made with 
 \end{table}
 \begin{enumerate}[(a)]
 	\item What is the experimental unit?
+
+	      \textbf{Answer:} The biscuits dough
 	\item Under this model  show why each of the following is estimable or non-estimable:
 	      $$
-		      \tau_1, \tau_2, \tau_3,\tau_4,\tau_1, \quad \tau_1 + \tau_2 - (\tau_3 + \tau_4), \mu + \tau_1 + \tau_2
+		      \tau_1, \tau_2, \tau_3,\tau_4, \quad \tau_1 + \tau_2 - (\tau_3 + \tau_4), \mu + \tau_1 + \tau_2
 	      $$
+	      The overall model is given by the following:
+	      $$
+		      Y_{ij} = \mu + \tau_i + \epsilon_{ij}
+	      $$
+	      Thus:
+	      \begin{enumerate}
+		      \item $\tau_1 + \tau_2 -(\tau_3 + \tau_4$ Is also estimable given it is a also a linear combination
+		      \item $\mu + \tau_1 + \tau_2$ is also estimable given it is a also a linear combination
+	      \end{enumerate}
 	\item Preform the analysis of variance to test the hypothesis of no treatment effect.
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA for the Effect of Baking Powder on Biscuit Rise Height}
+		      \begin{tabular}{lrrrrr}
+			      \hline
+			      \textbf{Source} & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} & \textbf{F-statistic} & \textbf{p-value}         \\
+			      \hline
+			      BakingPowder    & 3           & 6145.73                 & 2048.58              & 1822.65              & \(3.23 \times 10^{-16}\) \\
+			      Residual        & 12          & 13.49                   & 1.12                 & -                    & -                        \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
+
 	\item Formulate a contrast to test the hypothesis that increase in rise height is a linear function of the increase in baking powder in the dough,
 	      and test this hypothesis.
+
+	      Choosing $L = -3\tau_1 -1\tau_2 + 1 \tau_3 + 3 \tau_3$ with the hypothesis:
+	      \begin{enumerate}
+		      \item $H_0$: no linear
+		      \item $H_1$: linear
+	      \end{enumerate}
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA for the Effect of Baking Powder on Biscuit Rise Height and Linear Trend}
+		      \begin{tabular}{lrrrrr}
+			      \hline
+			      \textbf{Source}          & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} & \textbf{F-statistic} & \textbf{p-value}       \\
+			      \hline
+			      Treatment (BakingPowder) & 3           & 6145.732                & 2048.577             & 1822.645             & $3.23 \times 10^{-16}$ \\
+			      Linear Trend             & 1           & 6137.256                & 6137.256             & 3912.062             & $1.54 \times 10^{-18}$ \\
+			      Residual                 & 12          & 13.488                  & 1.124                & -                    & -                      \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
+	      Withe the p-value we reject the null hypothesis and say that there exists a linear relationhsip between Rise and amount of baking powder
+
 	\item If the dough were made in batches and the four replicate biscuit rise heights in each column (Table 1) were all from the same batch, would your answer to (a) be different?
 	      How could the data be analyzed if this were the case?
+
+	      \textbf{Answered:} The answer would be the same if would now have a batch effect. We could use latin squares for this experiments if it is structured in batches
 \end{enumerate}
 
 \section{Problem 3} Consider a completely randomized design with four treatment groups, in which a total of $N = 100$
