@@ -1,0 +1,310 @@
+
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,mathrsfs}
+\usepackage{xparse}
+\usepackage[inline,shortlabels]{enumitem}
+\setlist{topsep=2pt,itemsep=2pt,parsep=0pt,partopsep=0pt}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,top=0.5in,bottom=0.2in,left=0.5in,right=0.5in,footskip=0.3in,includefoot]{geometry}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{minted} % tcolorbox minted library, required to use the "minted" tcb listing engine (this library is not loaded by the option [most])
+\usepackage{minted} % Allows input of raw code, such as Python code
+% \usepackage[colorlinks]{hyperref}
+
+
+\usetikzlibrary{automata,positioning}
+
+\tcbset{
+    pythoncodebox/.style={
+        enhanced jigsaw,breakable,
+        colback=gray!10,colframe=gray!20!black,
+        boxrule=1pt,top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top left,
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolframe] (frame.south west)
+                --([yshift=-4pt]frame.north west)
+                to[out=90,in=180] ([xshift=4pt]frame.north west)
+                --([xshift=-8pt]frame.north east)
+                to[out=0,in=180] ([xshift=16pt]frame.south east)
+                --cycle;
+            }
+        },
+        title={#1}, % Argument of pythoncodebox specifies the title
+        fonttitle=\sffamily\bfseries
+    },
+    pythoncodebox/.default={}, % Default is No title
+    %%% Starred version has no frame %%%
+    pythoncodebox*/.style={
+        enhanced jigsaw,breakable,
+        colback=gray!10,coltitle=gray!20!black,colbacktitle=tcbcolback,
+        frame hidden,
+        top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top text left={yshift=-1mm},
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolback] (interior.south west)
+                --([yshift=-4pt]interior.north west)
+                to[out=90,in=180] ([xshift=4pt]interior.north west)
+                --([xshift=-8pt]interior.north east)
+                to[out=0,in=180] ([xshift=16pt]interior.south east)
+                --cycle;
+            }
+        },
+        title={#1}, % Argument of pythoncodebox specifies the title
+        fonttitle=\sffamily\bfseries
+    },
+    pythoncodebox*/.default={}, % Default is No title
+}
+
+% Custom tcolorbox for Python code (not the code itself, just the box it appears in)
+\newtcolorbox{pythonbox}[1][]{pythoncodebox=#1}
+\newtcolorbox{pythonbox*}[1][]{pythoncodebox*=#1} % Starred version has no frame
+
+\tcbset{
+    rcodebox/.style={
+        enhanced jigsaw,breakable,
+        colback=blue!5,colframe=blue!40!black,
+        boxrule=1pt,top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top left,
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolframe] (frame.south west)
+                --([yshift=-4pt]frame.north west)
+                to[out=90,in=180] ([xshift=4pt]frame.north west)
+                --([xshift=-8pt]frame.north east)
+                to[out=0,in=180] ([xshift=16pt]frame.south east)
+                --cycle;
+            }
+        },
+        title={#1},
+        fonttitle=\sffamily\bfseries
+    },
+    rcodebox/.default={}, % Default title = none
+    % Starred version has no frame
+    rcodebox*/.style={
+        enhanced jigsaw,breakable,
+        colback=blue!5,coltitle=blue!40!black,colbacktitle=tcbcolback,
+        frame hidden,
+        top=2pt,bottom=2pt,left=2pt,right=2pt,
+        sharp corners,before skip=10pt,after skip=10pt,
+        attach boxed title to top text left={yshift=-1mm},
+        boxed title style={empty,
+            top=0pt,bottom=0pt,left=2pt,right=2pt,
+            interior code={\fill[fill=tcbcolback] (interior.south west)
+                --([yshift=-4pt]interior.north west)
+                to[out=90,in=180] ([xshift=4pt]interior.north west)
+                --([xshift=-8pt]interior.north east)
+                to[out=0,in=180] ([xshift=16pt]interior.south east)
+                --cycle;
+            }
+        },
+        title={#1},
+        fonttitle=\sffamily\bfseries
+    },
+    rcodebox*/.default={}, % Default title = none
+}
+
+% Custom tcolorbox environments
+\newtcolorbox{rbox}[1][]{rcodebox=#1}
+\newtcolorbox{rbox*}[1][]{rcodebox*=#1}
+
+% Basic Document Settings
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+\setlength\parindent{0pt}
+
+% Homework Details
+\newcommand{\hmwkTitle}{Exam 1}
+\newcommand{\hmwkDueDate}{Octubre 27, 2025}
+\newcommand{\hmwkClass}{ESMA 6787}
+\newcommand{\hmwkClassInstructor}{Israel Almodovar}
+\newcommand{\hmwkAuthorName}{\textbf{Alejandro Ouslan}}
+
+% Title Page
+\title{
+	\vspace{2in}
+	\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+	\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+	\vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+	\vspace{3in}
+}
+
+\author{\hmwkAuthorName}
+\date{}
+
+
+% Begin document
+\begin{document}
+\maketitle
+\pagebreak
+\tableofcontents
+\pagebreak
+
+% Homework problem 1
+\section{problem 1}
+Define the followings:
+\begin{enumerate}[(a)]
+	\item p-value:
+	\item Projection Matrix:
+	\item Complete randomized Designd:
+	\item Complete Randomized Block Designd:
+\end{enumerate}
+
+\section{Problem 2}
+In the experiemtn to study the effects of the amoyunt of baking powder in a biscuit dough upon the rise heights of the biscuits, four
+levels of baking powder were tested and four replicate biscuits  were macde iwth each level in a random order.
+\begin{table}[!ht]
+	\centering
+	\caption{Training Methods Data}
+	\begin{tabular}{c c c c}
+		\hline
+		\textbf{0.25 tsp} & \textbf{0.5 tsp} & \textbf{0.75 tsp} & \textbf{1 tsp} \\
+		\hline
+		11.4              & 27.8             & 47.6              & 61.6           \\
+		11.0              & 29.2             & 47.0              & 62.4           \\
+		11.3              & 26.8             & 47.3              & 63.0           \\
+		9.5               & 26.0             & 45.5              & 63.9           \\
+		\hline
+	\end{tabular}
+\end{table}
+\begin{enumerate}[(a)]
+	\item What is the experimental unit?
+	\item Under this model  show why each of the following is estimable or nonestimable:
+	      $$
+		      \tau_1, \tau_2, \tau_3,\tau_4,\tau_1, \quad \tau_1 + \tau_2 - (\tau_3 + \tau_4), \mu + \tau_1 + \tau_2
+	      $$
+	\item Preform the analysis of variance to test the hypothesis of no treatment effect.
+	\item Formulate a contrast to test the hypothesis tht increase in rise height is a linear funciton of the increase in baking powder in th edough,
+	      and test this hypothesis.
+	\item If teh dough were made in batches and the four replicate biscuit rise heights in each column (Table 1) were all from the same batch, would your answer to (a) be different?
+	      How could the data be analyzed if this were the case?
+\end{enumerate}
+
+\section{Problem 3} Consider a completely randomized design with four treatment groups, in which a total of $N = 100$
+units are to be used. Although it won’t be explicitly used in the analysis model, treatments 1 through
+5 actually represent increasing concentrations of one component in an otherwise standard chemical
+compound, and the primary purpose of the experiment is to understand whether certain measurable
+properties of the compound change with this concentration. The investigator decides to address these
+questions by estimating these quantities
+$$
+	\tau_2 -\tau_1, \tau_2-\tau_3, \tau_2-\tau_4,\tau_3 - \tau_4, \tau_3-\tau_1
+$$
+where each $\tau_i$ is a parameter in the standard effects model. Find the optimal allocation for the 100
+available units (i.e., values for $n1,\cdots, n5$) that minimizes the average variance of estimates of the five
+contrasts of interest. Do this as a constrained, continuous optimization problem, then round the solution
+to integer values that are consistent with the required constraints.
+
+\section{Problem 4}
+
+The effect of plant growth regulators and spear bud scales on spear elongation in asparagus
+was investigated by Yang-Gyu and Woolley (2006). Elongation rate of spears is an important factor
+determining final yield of asparagus in many temperate climatic conditions. Spears were harvested
+from 6-year-old Jersey Giant asparagus plants grown in a commercial planting at Bulls (latitude 40.2S,
+longitude 175.4E), New Zealand. Spears were harvested randomly and transported from field to lab
+for investigation. After trimming to 80mm length, spears were immersed completely for 1 h in aqueous
+solutions of 10 mg l-1 concentration of indole-3-acetic acid (IAA), abscisic acid (ABA), GA3, or CPPU
+(Sitofex EC 2.0\%; SKW, Trostberg, Germany) in test tubes. Control spears were submerged in distilled
+water for 1 h. The experiment was a completely randomized design with five replications (spears) per
+treatment
+\begin{table}[!ht]
+	\centering
+	\caption{Spear length in mm}
+	\begin{tabular}{c c c c c c}
+		\hline
+		\textbf{Control} & \textbf{IAA} & \textbf{ABA} & \textbf{GA3} & \textbf{CPPU} \\
+		\hline
+		94.7             & 89.9         & 96.8         & 99.1         & 104.4         \\
+		96.1             & 94.0         & 87.8         & 95.3         & 98.9          \\
+		86.5             & 99.1         & 89.1         & 94.6         & 98.9          \\
+		98.5             & 92.8         & 91.1         & 93.1         & 106.5         \\
+		94.9             & 99.4         & 89.4         & 95.7         & 104.8         \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{enumerate}[(a)]
+	\item What are the experimental units?
+	\item Proposed a linear model in this case. Explain each of the variable carefully.
+	\item Test the hypothesis of no treatment effect. State teh alternative, decision rule, and conclusion.
+	\item Test all pairwise comparisons of treatment means. You can use either Bonferroni, Turkeyk, Scheffe or Dunnett, asssume that $\alpha = 0.01$.
+	\item Can we test if there's difference between the control group with any of the treatment group? Discuss your results bases on part (c) and (d).
+	\item Perform a non-parametric approach to test the hypothesis of no treatment effect. State the alternative, decision rule, conclusion and asuume that $\alpha 0.01$.
+	\item Preform non-parametric pairwise comparisons of treatment effect. Discuss your results comparing the control gropu wiht the treatment groups.
+	      Further, asume that $\alpha = 0.01$.
+\end{enumerate}
+
+\section{Problem 5}
+An accounting firm prior to introducing in the firm widespread training in statistical sampling
+for auditing tested three training methods: (1) study at home with programmed training materials,
+(2) training sessions at local offices conducted by local staff, and (3) training sessions in Chicago con-
+ducted by national staff. Thirty auditors were grouped into 10 blocks of three according to time elapsed
+since college graduation and the auditors in each block were randomly assigned to the three training
+methods. At the end of the training each auditor was asked to analyze a complex case involving statistical
+applications proficiency measure based on this analysis was obtained for each auditor.
+\begin{table}[ht]
+	\centering
+	\caption{Training Methods}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textbf{Block} & \textbf{1} & \textbf{2} & \textbf{3} \\
+		\hline
+		1              & 73         & 81         & 92         \\
+		2              & 76         & 78         & 89         \\
+		3              & 75         & 76         & 87         \\
+		4              & 74         & 77         & 90         \\
+		5              & 76         & 71         & 88         \\
+		6              & 73         & 75         & 86         \\
+		7              & 68         & 72         & 88         \\
+		8              & 64         & 74         & 82         \\
+		9              & 65         & 73         & 81         \\
+		10             & 62         & 69         & 78         \\
+		\hline
+	\end{tabular}
+\end{table}
+\pagebreak
+\begin{enumerate}[(a)]
+	\item Why do you think the blocking variable "time elapsed since college graduation" was employed?
+	\item  Obtain the residuals for the randomized block model and plot them against the fitted values. Also, prepare a normal probability plot of the residuals. What are your findings?
+	\item  Plot the responses $Y_{ij}$ by blocks. What does this plot suggest about the appropriateness of the no-interaction assumption here?
+\end{enumerate}
+
+Assume that the randomized block model is appropriate.
+\begin{enumerate}[(a)]
+	\item Test whether or not the mean proficiency is the same for the three training methods. Use a level of significance $\alpha = 0.05$. State the alternatives, decision rule, and conclusion. What is the p-value of the test?
+	\item Make all pairwise comparisons between the training method means; use the Tukey procedure with a 90\% confidence level coefficient. State your findings.
+	\item Test whether or not blocking effects are present; use \( \alpha = 0.05 \). State the alternatives, decision rule, and conclusion. What is the p-value of the test?
+\end{enumerate}
+\end{document}
