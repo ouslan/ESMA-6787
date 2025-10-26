@@ -235,7 +235,7 @@ Consider a completely randomized design with five treatments and a total of $N =
 	\tau_2 -\tau_1, \quad \tau_2-\tau_3, \quad \tau_2-\tau_4, \quad \tau_3 - \tau_4, \quad \tau_3-\tau_1
 \]
 
-where $\tau_i$ are the treatment effects in the standard effects model.
+Where $\tau_i$ are the treatment effects in the standard effects model.
 
 
 \[
@@ -311,13 +311,86 @@ treatment
 
 \begin{enumerate}[(a)]
 	\item What are the experimental units?
+	      \textbf{Answer:} spear bud scales on spear elongation in asparagus are the experimental unit
 	\item Proposed a linear model in this case. Explain each of the variable carefully.
+	      Explain each of the terms carefully in context of the problem
+	      $$
+		      Y_{ij}= \mu + \tau_i + \epsilon_{ij}
+	      $$
+	      \begin{enumerate}
+		      \item $Y_{ij}$: The spear length
+		      \item $\mu$: the overall mean of the spear length
+		      \item $\tau_i$: effect of the treatments
+		      \item $\epsilon$: is the error term o unobserved effects
+	      \end{enumerate}
 	\item Test the hypothesis of no treatment effect. State the alternative, decision rule, and conclusion.
-	\item Test all pairwise comparisons of treatment means. You can use either Bonferroni, Turkeyk, Scheffe or Dunnett, asssume that $\alpha = 0.01$.
+	      \begin{enumerate}
+		      \item $H_0$: All treatments have the same effects of the spear length
+		      \item $H_1$: At least one treatment has an effect
+	      \end{enumerate}
+
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA for the effect of treatments on asparagus spear length}
+		      \begin{tabular}{lccccc}
+			      \hline
+			      \textbf{Source} & \textbf{Sum of Squares} & \textbf{df} & \textbf{F} & \textbf{p-value} \\
+			      \hline
+			      C(Treatment)    & 377.4936                & 4           & 6.9837     & 0.001092         \\
+			      Residual        & 270.2680                & 20          & -          & -                \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
+
+	      Given that the p-value is $0.001$ we reject the alternative hypothesis. Thus there sufficient evidence that
+	      there is an effect from the treatments to the length of the spear
+	\item Test all pairwise comparisons of treatment means. You can use either Bonferroni, Turkeyk, Scheffe or Dunnett, assume that $\alpha = 0.01$.
+	      \begin{table}[h!]
+		      \centering
+		      \caption{Tukey HSD pairwise comparisons of treatment means (\(\alpha = 0.01\)) for asparagus spear length}
+		      \begin{tabular}{l l c c c c c}
+			      \hline
+			      \textbf{Group 1} & \textbf{Group 2} & \textbf{Mean Diff} & \textbf{p-adj} & \textbf{Lower} & \textbf{Upper} & \textbf{Significant} \\
+			      \hline
+			      ABA              & CPPU             & 11.86              & 0.0005         & 3.158          & 20.562         & Yes                  \\
+			      ABA              & Control          & 3.30               & 0.623          & -5.402         & 12.002         & No                   \\
+			      ABA              & GA3              & 4.72               & 0.2881         & -3.982         & 13.422         & No                   \\
+			      ABA              & IAA              & 4.20               & 0.3973         & -4.502         & 12.902         & No                   \\
+			      CPPU             & Control          & -8.56              & 0.0114         & -17.262        & 0.142          & No                   \\
+			      CPPU             & GA3              & -7.14              & 0.0425         & -15.842        & 1.562          & No                   \\
+			      CPPU             & IAA              & -7.66              & 0.0266         & -16.362        & 1.042          & No                   \\
+			      Control          & GA3              & 1.42               & 0.9717         & -7.282         & 10.122         & No                   \\
+			      Control          & IAA              & 0.90               & 0.9948         & -7.802         & 9.602          & No                   \\
+			      GA3              & IAA              & -0.52              & 0.9994         & -9.222         & 8.182          & No                   \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
+
 	\item Can we test if there's difference between the control group with any of the treatment group? Discuss your results bases on part (c) and (d).
-	\item Perform a non-parametric approach to test the hypothesis of no treatment effect. State the alternative, decision rule, conclusion and asuume that $\alpha 0.01$.
-	\item Preform non-parametric pairwise comparisons of treatment effect. Discuss your results comparing the control gropu wiht the treatment groups.
+	      \textbf{Answer}: There does not seem to be sufficient evidence to say that there is difference between the control group and the treatment group.
+	      Although there seem to be a difference between ABA and CPPU.
+	\item Perform a non-parametric approach to test the hypothesis of no treatment effect. State the alternative, decision rule, conclusion and asume that $\alpha 0.01$.
+	      \begin{table}[h!]
+		      \centering
+		      \caption{Kruskal-Wallis test for treatment effect on asparagus spear length (\(\alpha = 0.01\))}
+		      \begin{tabular}{l c c c}
+			      \hline
+			      \textbf{Test}    & \textbf{H-statistic} & \textbf{p-value} & \textbf{Decision at \(\alpha = 0.01\)} \\
+			      \hline
+			      Kruskal-Wallis H & 11.734               & 0.0194           & Fail to reject \(H_0\)                 \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
+	      \begin{enumerate}
+		      \item $H_0$: no treatment effect
+		      \item $H_1$: there is a treatment effect
+	      \end{enumerate}
+
+	\item Preform non-parametric pairwise comparisons of treatment effect. Discuss your results comparing the control group whit the treatment groups.
 	      Further, asume that $\alpha = 0.01$.
+
+	      \textbf{Answer:} There is not sufficient evidence to reject the null hypothesis. This the same for the Turkey test. We might not be able to detect the changes
+	      because of the error or the effects between the treatment is very minimal.
 \end{enumerate}
 
 \section{Problem 5}
