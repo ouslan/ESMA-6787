@@ -125,19 +125,19 @@
 % Homework problem 1
 \section*{Problem 1: Definitions}
 \begin{enumerate}[(a)]
-  \item \textbf{Interaction plot:} An interaction plot as a visual tool to determine if 
-    there interaction between 2 factors with each other. You determine there is interaction 
-    when you see the line intersect with each other.
-  \item \textbf{Random effect:} When we work with block designs a random effect is the unobserved 
-    effects within the blocks, that is to say each group contains its own random effect $N(0,\sigma)$
-  \item \textbf{Factorial design:} Factorial design is a method to combare multiple factors with each other 
-    and determine its effects on the response variable. Example we al looking at the shrinkage of type of cloth 
-    and water temperature, in this experiments the type of cloth and water temperature are the factors.
-  \item \textbf{Intraclass correlation:} This is the correlation that groups can have with each other.
-  \item \textbf{Split-plot design:} The split-plot are design method where we mesure the effects of factors. This is 
-    done by first dividing the entire group in section where each will revive a specific treatment the each group is 
-    divided in sub groups that recave the other factor. This results in a multiple big groups that contain a factor and inside 
-    those groups there is a sub group that are randomly assigned the factors.
+	\item \textbf{Interaction plot:} An interaction plot as a visual tool to determine if
+	      there interaction between 2 factors with each other. You determine there is interaction
+	      when you see the line intersect with each other.
+	\item \textbf{Random effect:} When we work with block designs a random effect is the unobserved
+	      effects within the blocks, that is to say each group contains its own random effect $N(0,\sigma)$
+	\item \textbf{Factorial design:} Factorial design is a method to combare multiple factors with each other
+	      and determine its effects on the response variable. Example we al looking at the shrinkage of type of cloth
+	      and water temperature, in this experiments the type of cloth and water temperature are the factors.
+	\item \textbf{Intraclass correlation:} This is the correlation that groups can have with each other.
+	\item \textbf{Split-plot design:} The split-plot are design method where we mesure the effects of factors. This is
+	      done by first dividing the entire group in section where each will revive a specific treatment the each group is
+	      divided in sub groups that recave the other factor. This results in a multiple big groups that contain a factor and inside
+	      those groups there is a sub group that are randomly assigned the factors.
 \end{enumerate}
 
 \section*{Problem 2: Marketing Problem}
@@ -149,11 +149,11 @@ characteristics of quality. Four agencies were chosen for each factor level comb
 their work evaluated. See \textbf{marketing.txt} files for this dataset.
 
 \begin{enumerate}[(a)]
-  \item Create interaction plots of the factors for the fee schedule and scope of the work of the 
-    estimated treatment means $\bar{Y}_{ij}$. Does it appear that any interactions are present? Any main effects?
-    
-    \textbf{Answer:} There appears to no interaction between schedule. The main effect appears to be that as the fee of the 
-    fee increases the quality of work decrease.
+	\item Create interaction plots of the factors for the fee schedule and scope of the work of the
+	      estimated treatment means $\bar{Y}_{ij}$. Does it appear that any interactions are present? Any main effects?
+
+	      \textbf{Answer:} There appears to no interaction between schedule. The main effect appears to be that as the fee of the
+	      fee increases the quality of work decrease.
 
 	      \begin{figure}[H]
 		      \centering
@@ -161,221 +161,221 @@ their work evaluated. See \textbf{marketing.txt} files for this dataset.
 		      \caption{Interaction Graph}
 	      \end{figure}
 
-  \item Create interaction plots of the factors fee schedule and type of supervisory control of the
-    estimated treatment  means $\bar{Y}_{ijk}$. Do your plots convey the same information as those in part (a)? 
-    
-    \textbf{Answer:} There appears to no interaction between supervisory. The main effect appears to be that as the fee of the 
-    fee increases the quality of work decrease. This seems to be the same effect of part a
+	\item Create interaction plots of the factors fee schedule and type of supervisory control of the
+	      estimated treatment  means $\bar{Y}_{ijk}$. Do your plots convey the same information as those in part (a)?
+
+	      \textbf{Answer:} There appears to no interaction between supervisory. The main effect appears to be that as the fee of the
+	      fee increases the quality of work decrease. This seems to be the same effect of part a
 
 	      \begin{figure}[H]
 		      \centering
 		      \includegraphics[width=0.5\textwidth]{assets/prob2b.png}
 		      \caption{Interaction Graph}
 	      \end{figure}
-    
-  \item Obtain the analysis of variance table.
 
-\begin{table}[!ht]
-    \centering
-    \caption{ANOVA for the Effect of Fee and Schedule on Work Index}
-    \begin{tabular}{lrrrrr}
-        \hline
-        \textbf{Source}           & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} & \textbf{F-statistic} & \textbf{p-value}       \\
-        \hline
-        C(Fee)                   & 2.0         & 10044.27                & 5022.14              & 45.09                 & \(3.50 \times 10^{-11}\) \\
-        C(Schedule)              & 1.0         & 1833.98                 & 1833.98              & 16.47                 & \(2.11 \times 10^{-4}\)  \\
-        C(Fee):C(Schedule)       & 2.0         & 1.60                    & 0.80                 & 0.01                  & \(9.93 \times 10^{-1}\)  \\
-        Residual                 & 42.0        & 4678.04                 & 111.38               & -                     & -                       \\
-        \hline
-    \end{tabular}
-\end{table}
+	\item Obtain the analysis of variance table.
 
-  \item Test for three-factor interactions: using $\alpha = 0.01$. State the alternatives, division rule, and conclusion.
-    What is the p-value of the test?
-    \begin{enumerate}
-      \item $H_0$: There is no three way interaction 
-      \item $H_a$: There is three way interaction
-    \end{enumerate}
-    \begin{table}[!ht]
-    \centering
-    \caption{ANOVA for the Effect of Fee, Schedule, and Supervisory on Work Index (Part 1)}
-    \begin{tabular}{lrrrr}
-        \hline
-        \textbf{Source}                            & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} \\
-        \hline
-        C(Fee)                                     & 2.0         & 10044.27                & 5022.14              \\
-        C(Schedule)                                & 1.0         & 1833.98                 & 1833.98              \\
-        C(Supervisory)                             & 1.0         & 3832.40                 & 3832.40              \\
-        C(Fee):C(Schedule)                        & 2.0         & 1.60                    & 0.80                 \\
-        C(Fee):C(Supervisory)                     & 2.0         & 0.79                    & 0.39                 \\
-        C(Schedule):C(Supervisory)                & 1.0         & 574.78                  & 574.78               \\
-        C(Fee):C(Schedule):C(Supervisory)         & 2.0         & 3.94                    & 1.97                 \\
-        Residual                                   & 36.0        & 266.14                  & 7.39                 \\
-        \hline
-    \end{tabular}
-\end{table}
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA for the Effect of Fee and Schedule on Work Index}
+		      \begin{tabular}{lrrrrr}
+			      \hline
+			      \textbf{Source}    & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} & \textbf{F-statistic} & \textbf{p-value}         \\
+			      \hline
+			      C(Fee)             & 2.0         & 10044.27                & 5022.14              & 45.09                & \(3.50 \times 10^{-11}\) \\
+			      C(Schedule)        & 1.0         & 1833.98                 & 1833.98              & 16.47                & \(2.11 \times 10^{-4}\)  \\
+			      C(Fee):C(Schedule) & 2.0         & 1.60                    & 0.80                 & 0.01                 & \(9.93 \times 10^{-1}\)  \\
+			      Residual           & 42.0        & 4678.04                 & 111.38               & -                    & -                        \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
 
-\pagebreak
+	\item Test for three-factor interactions: using $\alpha = 0.01$. State the alternatives, division rule, and conclusion.
+	      What is the p-value of the test?
+	      \begin{enumerate}
+		      \item $H_0$: There is no three way interaction
+		      \item $H_a$: There is three way interaction
+	      \end{enumerate}
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA for the Effect of Fee, Schedule, and Supervisory on Work Index (Part 1)}
+		      \begin{tabular}{lrrrr}
+			      \hline
+			      \textbf{Source}                   & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} \\
+			      \hline
+			      C(Fee)                            & 2.0         & 10044.27                & 5022.14              \\
+			      C(Schedule)                       & 1.0         & 1833.98                 & 1833.98              \\
+			      C(Supervisory)                    & 1.0         & 3832.40                 & 3832.40              \\
+			      C(Fee):C(Schedule)                & 2.0         & 1.60                    & 0.80                 \\
+			      C(Fee):C(Supervisory)             & 2.0         & 0.79                    & 0.39                 \\
+			      C(Schedule):C(Supervisory)        & 1.0         & 574.78                  & 574.78               \\
+			      C(Fee):C(Schedule):C(Supervisory) & 2.0         & 3.94                    & 1.97                 \\
+			      Residual                          & 36.0        & 266.14                  & 7.39                 \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
 
-\begin{table}[!ht]
-    \centering
-    \caption{ANOVA for the Effect of Fee, Schedule, and Supervisory on Work Index (Part 2)}
-    \begin{tabular}{lrr}
-        \hline
-        \textbf{Source}                            & \textbf{F-statistic} & \textbf{p-value} \\
-        \hline
-        C(Fee)                                     & 679.34               & \(2.59 \times 10^{-29}\) \\
-        C(Schedule)                                & 248.08               & \(1.00 \times 10^{-17}\) \\
-        C(Supervisory)                             & 518.40               & \(5.74 \times 10^{-23}\) \\
-        C(Fee):C(Schedule)                        & 0.11                 & \(8.98 \times 10^{-1}\) \\
-        C(Fee):C(Supervisory)                     & 0.05                 & \(9.48 \times 10^{-1}\) \\
-        C(Schedule):C(Supervisory)                & 77.75                & \(1.60 \times 10^{-10}\) \\
-        C(Fee):C(Schedule):C(Supervisory)         & 0.27                 & \(7.67 \times 10^{-1}\) \\
-        Residual                                   & -                    & -                    \\
-        \hline
-    \end{tabular}
-\end{table}
+	      \pagebreak
 
-\textbf{Answer:} Given that C(Fee):C(Schedule):C(Supervisory) as a p-value of $0.67$ we don't have enough evidence to 
-reject the null hypothesis thous we conclude there is not sufficient evidence to conclude that there is a three way interaction
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA for the Effect of Fee, Schedule, and Supervisory on Work Index (Part 2)}
+		      \begin{tabular}{lrr}
+			      \hline
+			      \textbf{Source}                   & \textbf{F-statistic} & \textbf{p-value}         \\
+			      \hline
+			      C(Fee)                            & 679.34               & \(2.59 \times 10^{-29}\) \\
+			      C(Schedule)                       & 248.08               & \(1.00 \times 10^{-17}\) \\
+			      C(Supervisory)                    & 518.40               & \(5.74 \times 10^{-23}\) \\
+			      C(Fee):C(Schedule)                & 0.11                 & \(8.98 \times 10^{-1}\)  \\
+			      C(Fee):C(Supervisory)             & 0.05                 & \(9.48 \times 10^{-1}\)  \\
+			      C(Schedule):C(Supervisory)        & 77.75                & \(1.60 \times 10^{-10}\) \\
+			      C(Fee):C(Schedule):C(Supervisory) & 0.27                 & \(7.67 \times 10^{-1}\)  \\
+			      Residual                          & -                    & -                        \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
 
-  \item Test for factor fee schedule main effects; use $\alpha= 0.05$. State the alternatives, decision rule, and conclusion. Hint: You can use the confidence interval. 
-    \begin{enumerate}
-      \item $H_0$: The fee has no impact on work productivity. 
-      \item $H_a$: The fee has an impact on work productivity. 
-      \item $H_0$: The schedule has no impact on work productivity. 
-      \item $H_a$: The schedule has an impact on work productivity. 
-    \end{enumerate}
+	      \textbf{Answer:} Given that C(Fee):C(Schedule):C(Supervisory) as a p-value of $0.67$ we don't have enough evidence to
+	      reject the null hypothesis thous we conclude there is not sufficient evidence to conclude that there is a three way interaction
+
+	\item Test for factor fee schedule main effects; use $\alpha= 0.05$. State the alternatives, decision rule, and conclusion. Hint: You can use the confidence interval.
+	      \begin{enumerate}
+		      \item $H_0$: The fee has no impact on work productivity.
+		      \item $H_a$: The fee has an impact on work productivity.
+		      \item $H_0$: The schedule has no impact on work productivity.
+		      \item $H_a$: The schedule has an impact on work productivity.
+	      \end{enumerate}
 \end{enumerate}
 \begin{table}[!ht]
-    \centering
-    \caption{ANOVA for the Main Effects of Fee and Schedule on Work Index}
-    \begin{tabular}{lrrrrr}
-        \hline
-        \textbf{Source}         & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} & \textbf{F-statistic} & \textbf{p-value}         \\
-        \hline
-        C(Fee)                  & 2.0         & 10044.27                & 5022.14              & 47.22                  & \(1.12 \times 10^{-11}\) \\
-        C(Schedule)             & 1.0         & 1833.98                 & 1833.98              & 17.24                  & \(1.49 \times 10^{-4}\)  \\
-        Residual                & 44.0        & 4679.65                 & 106.36               & -                      & -                        \\
-        \hline
-    \end{tabular}
+	\centering
+	\caption{ANOVA for the Main Effects of Fee and Schedule on Work Index}
+	\begin{tabular}{lrrrrr}
+		\hline
+		\textbf{Source} & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} & \textbf{F-statistic} & \textbf{p-value}         \\
+		\hline
+		C(Fee)          & 2.0         & 10044.27                & 5022.14              & 47.22                & \(1.12 \times 10^{-11}\) \\
+		C(Schedule)     & 1.0         & 1833.98                 & 1833.98              & 17.24                & \(1.49 \times 10^{-4}\)  \\
+		Residual        & 44.0        & 4679.65                 & 106.36               & -                    & -                        \\
+		\hline
+	\end{tabular}
 \end{table}
 
 \begin{table}[!ht]
-    \centering
-    \caption{Confidence Intervals for the Factors in the ANOVA Model}
-    \begin{tabular}{lrr}
-        \hline
-        \textbf{Factor}              & \textbf{Lower Bound} & \textbf{Upper Bound} \\
-        \hline
-        Intercept                   & 110.91               & 122.91               \\
-        C(Fee)[T.2]                 & -8.31                & 6.39                 \\
-        C(Fee)[T.3]                 & -38.50               & -23.81               \\
-        C(Schedule)[T.2]            & -18.36               & -6.36                \\
-        \hline
-    \end{tabular}
+	\centering
+	\caption{Confidence Intervals for the Factors in the ANOVA Model}
+	\begin{tabular}{lrr}
+		\hline
+		\textbf{Factor}  & \textbf{Lower Bound} & \textbf{Upper Bound} \\
+		\hline
+		Intercept        & 110.91               & 122.91               \\
+		C(Fee)[T.2]      & -8.31                & 6.39                 \\
+		C(Fee)[T.3]      & -38.50               & -23.81               \\
+		C(Schedule)[T.2] & -18.36               & -6.36                \\
+		\hline
+	\end{tabular}
 \end{table}
 
-\textbf{Answer:} Looking at the p-values both the fee and the schedule and the fee have a negative impact of the work 
-productivity. Looking at the confidence intervals the fee 3 seems to have the negative impact while level 2 does not 
-seem to have an impact given that it does not include 0. 
+\textbf{Answer:} Looking at the p-values both the fee and the schedule and the fee have a negative impact of the work
+productivity. Looking at the confidence intervals the fee 3 seems to have the negative impact while level 2 does not
+seem to have an impact given that it does not include 0.
 
 \section*{Problem 3: Calculator}
 
-To test the efficiency of its new programmable calculator, a computer company selected at 
-random six engineers who were proficient in the use of both this calculator and an earlier model and 
-asked them to work out two problems on both calculators. One of the problems was statistical in nature, 
+To test the efficiency of its new programmable calculator, a computer company selected at
+random six engineers who were proficient in the use of both this calculator and an earlier model and
+asked them to work out two problems on both calculators. One of the problems was statistical in nature,
 the other was an engineering problem. The ercer of the four calculations was randomized independently
-for each engineer. The length of time (in minutes) required to solve each problem was observed. See 
+for each engineer. The length of time (in minutes) required to solve each problem was observed. See
 Table 1
 
 
 \begin{table}[!ht]
-    \centering
-    \caption{The length of time (in minutes) required to solve each problem}
-    \begin{tabular}{c | c c | c c}
-        \hline
-        \textbf{Programmer} & \multicolumn{2}{c|}{\textbf{Statistical Problem}} & \multicolumn{2}{c}{\textbf{Engineering Problem}} \\
-        \hline
-        & \textbf{New Model} & \textbf{Earlier Model} & \textbf{New Model} & \textbf{Earlier Model} \\
-        \hline
-        1 & 3.1 & 7.5 & 2.5 & 5.1 \\
-        2 & 3.8 & 8.1 & 2.8 & 5.3 \\
-        3 & 3.0 & 7.6 & 2.0 & 4.9 \\
-        4 & 3.4 & 7.8 & 2.7 & 5.5 \\
-        5 & 3.3 & 6.9 & 2.5 & 5.4 \\
-        6 & 3.6 & 7.8 & 2.4 & 4.8 \\
-        \hline
-    \end{tabular}
+	\centering
+	\caption{The length of time (in minutes) required to solve each problem}
+	\begin{tabular}{c | c c | c c}
+		\hline
+		\textbf{Programmer} & \multicolumn{2}{c|}{\textbf{Statistical Problem}} & \multicolumn{2}{c}{\textbf{Engineering Problem}}                                               \\
+		\hline
+		                    & \textbf{New Model}                                & \textbf{Earlier Model}                           & \textbf{New Model} & \textbf{Earlier Model} \\
+		\hline
+		1                   & 3.1                                               & 7.5                                              & 2.5                & 5.1                    \\
+		2                   & 3.8                                               & 8.1                                              & 2.8                & 5.3                    \\
+		3                   & 3.0                                               & 7.6                                              & 2.0                & 4.9                    \\
+		4                   & 3.4                                               & 7.8                                              & 2.7                & 5.5                    \\
+		5                   & 3.3                                               & 6.9                                              & 2.5                & 5.4                    \\
+		6                   & 3.6                                               & 7.8                                              & 2.4                & 4.8                    \\
+		\hline
+	\end{tabular}
 \end{table}
 
 
 
 \begin{enumerate}[(a)]
-  \item Create interaction plots of the estimated treatment means. Does it appear that treatment 
-    interaction effects are present?
+	\item Create interaction plots of the estimated treatment means. Does it appear that treatment
+	      interaction effects are present?
 	      \begin{figure}[H]
 		      \centering
 		      \includegraphics[width=0.5\textwidth]{assets/prob3a.png}
 		      \caption{Interaction Graph}
 	      \end{figure}
 
-  \textbf{Answer:} There apear to be no interaction between model type and problem. There apear to be a reduction in the completion time from a stats 
-  problem to a engineering problem. The overall effect is that the new model reduced the completion time.
+	      \textbf{Answer:} There apear to be no interaction between model type and problem. There apear to be a reduction in the completion time from a stats
+	      problem to a engineering problem. The overall effect is that the new model reduced the completion time.
 
-  \item Create the skeleton ANOVA. If there are any random effects mark them. 
-
-
-\begin{table}[ht]
-\centering
-\caption{Skeleton ANOVA Table for Mixed Effects Model}
-\begin{tabular}{lcccc}
-\hline
-\textbf{Source of Variation} & \textbf{df} & \textbf{SS} & \textbf{MS} & \textbf{F} \\
-\hline
-\textbf{Fixed Effects} & & & & \\
-Model (C(Model)) & 1 & SS\(_{M}\) & MS\(_{M}\) & F\(_{M}\) \\
-Problem (C(Problem)) & 1 & SS\(_{Problem}\) & MS\(_{P}\) & F\(_{P}\) \\
-Model $\times$ Problem (C(Model):C(Problem)) & 1 & SS\(_{M \times P}\) & MS\(_{M \times P}\) & F\(_{M \times P}\) \\
-\hline
-\textbf{Random Effects (R)} & & & & \\
-Programmer (random) & \(b-1 = 5\) & SS\(_{Prog}\) & MS\(_{Prog}\) & — \\
-Residual/Error (within Programmer) & \(ab - a - b + 1 = 18\) & SS\(_{R}\) & MS\(_{R}\) & — \\
-\hline
-Total & \(N-1 = 23\) & SS\(_{Total}\) & — & — \\
-\hline
-\end{tabular}
-\end{table}
+	\item Create the skeleton ANOVA. If there are any random effects mark them.
 
 
-\pagebreak
+	      \begin{table}[ht]
+		      \centering
+		      \caption{Skeleton ANOVA Table for Mixed Effects Model}
+		      \begin{tabular}{lcccc}
+			      \hline
+			      \textbf{Source of Variation}                 & \textbf{df}             & \textbf{SS}         & \textbf{MS}         & \textbf{F}         \\
+			      \hline
+			      \textbf{Fixed Effects}                       &                         &                     &                     &                    \\
+			      Model (C(Model))                             & 1                       & SS\(_{M}\)          & MS\(_{M}\)          & F\(_{M}\)          \\
+			      Problem (C(Problem))                         & 1                       & SS\(_{Problem}\)    & MS\(_{P}\)          & F\(_{P}\)          \\
+			      Model $\times$ Problem (C(Model):C(Problem)) & 1                       & SS\(_{M \times P}\) & MS\(_{M \times P}\) & F\(_{M \times P}\) \\
+			      \hline
+			      \textbf{Random Effects (R)}                  &                         &                     &                     &                    \\
+			      Programmer (random)                          & \(b-1 = 5\)             & SS\(_{Prog}\)       & MS\(_{Prog}\)       & —                  \\
+			      Residual/Error (within Programmer)           & \(ab - a - b + 1 = 18\) & SS\(_{R}\)          & MS\(_{R}\)          & —                  \\
+			      \hline
+			      Total                                        & \(N-1 = 23\)            & SS\(_{Total}\)      & —                   & —                  \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
 
-  \item Obtain the analysis of variance table.
 
-\begin{table}[!ht]
-\centering
-\caption{Mixed Linear Model Fixed Effects Results}
-\begin{tabular}{lcccccc}
-\hline
-\textbf{Effect} & \textbf{Coef.} & \textbf{Std. Err.} & \textbf{z-value} & \textbf{p-value} & \textbf{95\% CI} \\
-\hline
-Intercept & 5.167 & 0.131 & 39.402 & 0.000 & [4.910, 5.424] \\
-C(Model)[T.New] & -2.683 & 0.150 & -17.911 & 0.000 & [-2.977, -2.390] \\
-C(Problem)[T.Stat] & 2.450 & 0.150 & 16.354 & 0.000 & [2.156, 2.744] \\
-C(Model)[T.New]:C(Problem)[T.Stat] & -1.567 & 0.212 & -7.394 & 0.000 & [-1.982, -1.151] \\
-\hline
-\end{tabular}
-\end{table}
+	      \pagebreak
+
+	\item Obtain the analysis of variance table.
+
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{Mixed Linear Model Fixed Effects Results}
+		      \begin{tabular}{lcccccc}
+			      \hline
+			      \textbf{Effect}                    & \textbf{Coef.} & \textbf{Std. Err.} & \textbf{z-value} & \textbf{p-value} & \textbf{95\% CI} \\
+			      \hline
+			      Intercept                          & 5.167          & 0.131              & 39.402           & 0.000            & [4.910, 5.424]   \\
+			      C(Model)[T.New]                    & -2.683         & 0.150              & -17.911          & 0.000            & [-2.977, -2.390] \\
+			      C(Problem)[T.Stat]                 & 2.450          & 0.150              & 16.354           & 0.000            & [2.156, 2.744]   \\
+			      C(Model)[T.New]:C(Problem)[T.Stat] & -1.567         & 0.212              & -7.394           & 0.000            & [-1.982, -1.151] \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
 
 
-  \item Test Whether or not the two treatment factors interact. State the alternatives, decision 
-    rule, and conclusion. What is the p-value of the test?
-  \begin{enumerate}
-    \item $H_0$: There is no interaction 
-    \item $H_a$: There is interaction
-  \end{enumerate}
-  \textbf{Answer:} Given the previous table we see that the p value of $0.00$ and it is less than the critical value $0.05$ we reject the null hypothesis
-  and conclude that the time to solve the problem depends on the type of problem 
+	\item Test Whether or not the two treatment factors interact. State the alternatives, decision
+	      rule, and conclusion. What is the p-value of the test?
+	      \begin{enumerate}
+		      \item $H_0$: There is no interaction
+		      \item $H_a$: There is interaction
+	      \end{enumerate}
+	      \textbf{Answer:} Given the previous table we see that the p value of $0.00$ and it is less than the critical value $0.05$ we reject the null hypothesis
+	      and conclude that the time to solve the problem depends on the type of problem
 \end{enumerate}
 
 \section*{Problem 4: Automobile Manufacture}
@@ -386,185 +386,204 @@ the same model with manual transmission were randomly selected from the assembly
 drove each car twice over a 40-mile test course and the miles per gallon were recorded. See Table 2
 
 \begin{table}[!ht]
-    \centering
-    \caption{Miles per gallon for each driver in each car}
-    \begin{tabular}{c c c c c c}
-        \hline
-        \textbf{Driver} & \textbf{Car 1} & \textbf{Car 2} & \textbf{Car 3} & \textbf{Car 4} & \textbf{Car 5} \\
-        \hline
-        1 & 25.3 & 28.9 & 24.8 & 28.4 & 27.1 \\
-        1 & 25.2 & 30.0 & 25.1 & 27.9 & 26.6 \\
-        \hline
-        2 & 33.6 & 36.7 & 31.7 & 35.6 & 33.7 \\
-        2 & 32.9 & 36.5 & 31.9 & 35.0 & 33.9 \\
-        \hline
-        3 & 27.7 & 30.7 & 26.9 & 29.7 & 29.2 \\
-        3 & 28.5 & 30.4 & 26.3 & 30.2 & 28.9 \\
-        \hline
-        4 & 29.2 & 32.4 & 27.7 & 31.8 & 30.3 \\
-        4 & 29.3 & 32.4 & 28.9 & 30.7 & 29.9 \\
-        \hline
-    \end{tabular}
+	\centering
+	\caption{Miles per gallon for each driver in each car}
+	\begin{tabular}{c c c c c c}
+		\hline
+		\textbf{Driver} & \textbf{Car 1} & \textbf{Car 2} & \textbf{Car 3} & \textbf{Car 4} & \textbf{Car 5} \\
+		\hline
+		1               & 25.3           & 28.9           & 24.8           & 28.4           & 27.1           \\
+		1               & 25.2           & 30.0           & 25.1           & 27.9           & 26.6           \\
+		\hline
+		2               & 33.6           & 36.7           & 31.7           & 35.6           & 33.7           \\
+		2               & 32.9           & 36.5           & 31.9           & 35.0           & 33.9           \\
+		\hline
+		3               & 27.7           & 30.7           & 26.9           & 29.7           & 29.2           \\
+		3               & 28.5           & 30.4           & 26.3           & 30.2           & 28.9           \\
+		\hline
+		4               & 29.2           & 32.4           & 27.7           & 31.8           & 30.3           \\
+		4               & 29.3           & 32.4           & 28.9           & 30.7           & 29.9           \\
+		\hline
+	\end{tabular}
 \end{table}
 
 \begin{enumerate}[(a)]
-  \item Test whether or not the two factors interact. State the alternative, decision rule, and 
-    conclusion. What is the p-value of the test?
-    \begin{enumerate}
-      \item $H_0$: There is no intereaciton between driver and car 
-      \item $H_a$: There is interaciton between driver and car
-    \end{enumerate}
+	\item Test whether or not the two factors interact. State the alternative, decision rule, and
+	      conclusion. What is the p-value of the test?
+	      \begin{enumerate}
+		      \item $H_0$: There is no intereaciton between driver and car
+		      \item $H_a$: There is interaciton between driver and car
+	      \end{enumerate}
 
-\begin{table}[!ht]
-    \centering
-    \caption{ANOVA Results for Two-Way Interaction (Driver and Car)}
-    \begin{tabular}{c c c c c c}
-        \hline
-        \textbf{Source} & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Squares} & \textbf{F} & \textbf{PR(>F)} \\
-        \hline
-        C(Driver)        & 3.0  & 280.28475  & 93.428250  & 531.597440 & 3.125304e-19 \\
-        C(Car)           & 4.0  & 94.71350   & 23.678375  & 134.727596 & 3.663600e-14 \\
-        C(Driver):C(Car) & 12.0 & 2.44650    & 0.203875   & 1.160028   & 3.714839e-01 \\
-        Residual         & 20.0 & 3.51500    & 0.175750   & NaN        & NaN \\
-        \hline
-    \end{tabular}
-\end{table}
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA Results for Two-Way Interaction (Driver and Car)}
+		      \begin{tabular}{c c c c c c}
+			      \hline
+			      \textbf{Source}  & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Squares} & \textbf{F} & \textbf{PR(>F)} \\
+			      \hline
+			      C(Driver)        & 3.0         & 280.28475               & 93.428250             & 531.597440 & 3.125304e-19    \\
+			      C(Car)           & 4.0         & 94.71350                & 23.678375             & 134.727596 & 3.663600e-14    \\
+			      C(Driver):C(Car) & 12.0        & 2.44650                 & 0.203875              & 1.160028   & 3.714839e-01    \\
+			      Residual         & 20.0        & 3.51500                 & 0.175750              & NaN        & NaN             \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
 
-\textbf{Answer:} Given that the p-value is 0.37 and it is grater than the critical value we don't have sufficient evidence 
-to reject the null hypothesis and say there is interaction present.
+	      \textbf{Answer:} Given that the p-value is 0.37 and it is grater than the critical value we don't have sufficient evidence
+	      to reject the null hypothesis and say there is interaction present.
 
-  \item Test separately whether or not factor A and factor B main effects are present. For each 
-    test, and state the alternatives, decision rule, and conclusion. What is the p-value for each test?
+	\item Test separately whether or not factor A and factor B main effects are present. For each
+	      test, and state the alternatives, decision rule, and conclusion. What is the p-value for each test?
 
-\textbf{Driver effect}
-\begin{enumerate}
-  \item $H_0$: The miles per gallon for each driver is the same 
-  \item $H_a$: At least one is different
-\end{enumerate}
+	      \textbf{Driver effect}
+	      \begin{enumerate}
+		      \item $H_0$: The miles per gallon for each driver is the same
+		      \item $H_a$: At least one is different
+	      \end{enumerate}
 
-\textbf{Car effect}
-\begin{enumerate}
-  \item $H_0$: The miles per gallon for each car is the same 
-  \item $H_a$: At least one is different
-\end{enumerate}
+	      \textbf{Car effect}
+	      \begin{enumerate}
+		      \item $H_0$: The miles per gallon for each car is the same
+		      \item $H_a$: At least one is different
+	      \end{enumerate}
 
 
-\begin{table}[!ht]
-    \centering
-    \caption{ANOVA Results for Gasoline Consumption (Driver and Car)}
-    \begin{tabular}{c c c c c c}
-        \hline
-        \textbf{Source} & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Squares} & \textbf{F} & \textbf{PR(>F)} \\
-        \hline
-        C(Driver)        & 3.0  & 280.28475  & 93.42825  & 501.502 & 5.728485e-27 \\
-        C(Car)           & 4.0  & 94.71350   & 23.67838  & 127.100 & 3.668485e-19 \\
-        Residual         & 32.0 & 5.96150    & 0.18630   & NaN     & NaN \\
-        \hline
-    \end{tabular}
-\end{table}
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{ANOVA Results for Gasoline Consumption (Driver and Car)}
+		      \begin{tabular}{c c c c c c}
+			      \hline
+			      \textbf{Source} & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Squares} & \textbf{F} & \textbf{PR(>F)} \\
+			      \hline
+			      C(Driver)       & 3.0         & 280.28475               & 93.42825              & 501.502    & 5.728485e-27    \\
+			      C(Car)          & 4.0         & 94.71350                & 23.67838              & 127.100    & 3.668485e-19    \\
+			      Residual        & 32.0        & 5.96150                 & 0.18630               & NaN        & NaN             \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
 
-\textbf{Answer:} Looking at the table both Driver and Car have p-values below the critical value of 0.05 thus we reject the null 
-hypothesis and conclude there is both a driver effect and a car effect. 
+	      \textbf{Answer:} Looking at the table both Driver and Car have p-values below the critical value of 0.05 thus we reject the null
+	      hypothesis and conclude there is both a driver effect and a car effect.
 
-  \item Obtain point estimates of and which factor appears to have the greater effect on gasoline consumption?
-    \begin{table}[!ht]
-    \centering
-    \caption{Driver Means}
-    \begin{tabular}{c|c}
-        \hline
-        \textbf{Driver} & \textbf{Mean MPG} \\
-        \hline
-        1 & 26.93 \\
-        2 & 34.15 \\
-        3 & 28.85 \\
-        4 & 30.26 \\
-        \hline
-    \end{tabular}
-\end{table}
-\begin{table}[!ht]
-    \centering
-    \caption{Car Means}
-    \begin{tabular}{c|c}
-        \hline
-        \textbf{Car} & \textbf{Mean MPG} \\
-        \hline
-        Car\_1 & 28.96 \\
-        Car\_2 & 32.25 \\
-        Car\_3 & 27.91 \\
-        Car\_4 & 31.16 \\
-        Car\_5 & 29.95 \\
-        \hline
-    \end{tabular}
-\end{table}
+	\item Obtain point estimates of and which factor appears to have the greater effect on gasoline consumption?
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{Driver Means}
+		      \begin{tabular}{c|c}
+			      \hline
+			      \textbf{Driver} & \textbf{Mean MPG} \\
+			      \hline
+			      1               & 26.93             \\
+			      2               & 34.15             \\
+			      3               & 28.85             \\
+			      4               & 30.26             \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
+	      \begin{table}[!ht]
+		      \centering
+		      \caption{Car Means}
+		      \begin{tabular}{c|c}
+			      \hline
+			      \textbf{Car} & \textbf{Mean MPG} \\
+			      \hline
+			      Car\_1       & 28.96             \\
+			      Car\_2       & 32.25             \\
+			      Car\_3       & 27.91             \\
+			      Car\_4       & 31.16             \\
+			      Car\_5       & 29.95             \\
+			      \hline
+		      \end{tabular}
+	      \end{table}
 
-\textbf{Answer:} Looking at the means driver 2 and car 2 produce the most MPG consumption. Another way you could determine this is using the 
-OLS and looking at the coaliciones it generates and seeing which has the biggest coef
+	      \textbf{Answer:} Looking at the means driver 2 and car 2 produce the most MPG consumption. Another way you could determine this is using the
+	      OLS and looking at the coaliciones it generates and seeing which has the biggest coef
 
-  \item Use the Satterhwaite procedure to obtain an approximate 95 percent confidence interval. 
-    Is your interval estimate reasonably precise? Comment
+	\item Use the Satterhwaite procedure to obtain an approximate 95 percent confidence interval.
+	      Is your interval estimate reasonably precise? Comment
 
-\begin{table}[!ht]
-\centering
-\begin{tabular}{c|c|c}
-\hline
-\textbf{Parameter}        & \textbf{Lower Bound} & \textbf{Upper Bound} \\
-\hline
-Intercept                 & 25.452               & 26.238               \\
-C(Driver)[T.2]            & 6.827                & 7.613                \\
-C(Driver)[T.3]            & 1.527                & 2.313                \\
-C(Driver)[T.4]            & 2.937                & 3.723                \\
-C(Car)[T.Car2]           & 2.848                & 3.727                \\
-C(Car)[T.Car3]           & -1.490               & -0.610               \\
-C(Car)[T.Car4]           & 1.760                & 2.640                \\
-C(Car)[T.Car5]           & 0.548                & 1.427                \\
-\hline
-\end{tabular}
-\caption{95\% Confidence Intervals for Model Parameters}
-\label{tab:conf_intervals}
-\end{table}
+	      \begin{table}[!ht]
+		      \centering
+		      \begin{tabular}{c|c|c}
+			      \hline
+			      \textbf{Parameter} & \textbf{Lower Bound} & \textbf{Upper Bound} \\
+			      \hline
+			      Intercept          & 25.452               & 26.238               \\
+			      C(Driver)[T.2]     & 6.827                & 7.613                \\
+			      C(Driver)[T.3]     & 1.527                & 2.313                \\
+			      C(Driver)[T.4]     & 2.937                & 3.723                \\
+			      C(Car)[T.Car2]     & 2.848                & 3.727                \\
+			      C(Car)[T.Car3]     & -1.490               & -0.610               \\
+			      C(Car)[T.Car4]     & 1.760                & 2.640                \\
+			      C(Car)[T.Car5]     & 0.548                & 1.427                \\
+			      \hline
+		      \end{tabular}
+		      \caption{95\% Confidence Intervals for Model Parameters}
+		      \label{tab:conf_intervals}
+	      \end{table}
 
-\begin{table}[!ht]
-\centering
-\begin{tabular}{c|c|c}
-\hline
-\textbf{Parameter}        & \textbf{Lower Bound} & \textbf{Upper Bound} \\
-\hline
-Intercept                 & 25.30               & 26.39               \\
-C(Driver)[T.1]            & 6.80                & 7.64                \\
-C(Driver)[T.2]            & 1.44                & 2.40                \\
-C(Driver)[T.3]            & 2.86                & 3.80                \\
-C(Car)[T.Car1]           & 2.73                & 3.85                \\
-C(Car)[T.Car2]           & -1.58               & -0.52               \\
-C(Car)[T.Car3]           & 1.68                & 2.72                \\
-C(Car)[T.Car4]           & 0.52                & 1.46                \\
-\hline
-\end{tabular}
-\caption{95\% Confidence Intervals with Robust Standard Errors}
-\label{tab:conf_intervals_robust}
-\end{table}
+	      \begin{table}[!ht]
+		      \centering
+		      \begin{tabular}{c|c|c}
+			      \hline
+			      \textbf{Parameter} & \textbf{Lower Bound} & \textbf{Upper Bound} \\
+			      \hline
+			      Intercept          & 25.30                & 26.39                \\
+			      C(Driver)[T.1]     & 6.80                 & 7.64                 \\
+			      C(Driver)[T.2]     & 1.44                 & 2.40                 \\
+			      C(Driver)[T.3]     & 2.86                 & 3.80                 \\
+			      C(Car)[T.Car1]     & 2.73                 & 3.85                 \\
+			      C(Car)[T.Car2]     & -1.58                & -0.52                \\
+			      C(Car)[T.Car3]     & 1.68                 & 2.72                 \\
+			      C(Car)[T.Car4]     & 0.52                 & 1.46                 \\
+			      \hline
+		      \end{tabular}
+		      \caption{95\% Confidence Intervals with Robust Standard Errors}
+		      \label{tab:conf_intervals_robust}
+	      \end{table}
 
-\textbf{Answer:} they are some what more presice but the not as much as i would expect or reasonably argue.
+	      \textbf{Answer:} they are some what more precise but the not as much as i would expect or reasonably argue.
 
 \end{enumerate}
 
 \section*{Problem 5: Derive estimators}
 Some students (Junior, Ariana, Yeily, etc.) mentioned they wanted to derived some of the equations.
-Consider the following model $Y_{jik} = \mu + \alpha_i + \beta_j + \mu_{ij} + \epsilon_{ijk}; k=1,\ldots,K;i=1,2$. 
-Further, assume that $\mu_{ij}\sim N(0,\mu^2_u)$ and $\epsilon_{ijk} \sim N(0,\sigma^2_e)$
+Consider the following model $Y_{jik} = \mu + \alpha_i + \beta_j + \mu_{ij} + \epsilon_{ijk}; k=1,\ldots,K;i=1,2$.
+Further, assume that $\mu_{ij}\sim N(0,\sigma^2_u)$ and $\epsilon_{ijk} \sim N(0,\sigma^2_e)$
 
 \begin{enumerate}
-  \item Show that, 
-    $$
-    Var(Y_{ijk}) = \sigma^2_u + \sigma^2_e
-    $$
-  \item Show that, $k \neq k'$
-    $$
-    Cov(Y_{ijk}, Y_{ijk'}) = \sigma^2_u
-    $$
-  \item Show that, $k \neq k'$
-    $$
-    Cov(Y_{ijk}, Y_{ijk'}) = \frac{\sigma^2_u}{\sigma^2_u + \sigma^2_e}
-    $$
+	\item Show that,
+	      $$
+		      Var(Y_{ijk}) = \sigma^2_u + \sigma^2_e
+	      $$
+	      \textbf{Answer:}
+	      \[
+		      \begin{split}
+			      Var(Y_{ijk}) & = Var(\mu + \alpha_i + \beta_j + \mu_{ij} + \epsilon_{ijk})                     \\
+			                   & = Var(\mu) + Var(\alpha_i) + var(\beta_j) + var(\mu_{ij}) + var(\epsilon_{ijk}) \\
+			                   & = 0 + 0 + 0 + \sigma^2_u + \sigma^2_e                                           \\
+			                   & = \boxed{\sigma^2_u + \sigma^2_e}                                               \\
+		      \end{split}
+	      \]
+	\item Show that, $k \neq k'$
+	      $$
+		      Cov(Y_{ijk}, Y_{ijk'}) = \sigma^2_u
+	      $$
+	      \textbf{Answer:}
+	      \[
+		      \begin{split}
+			      Cov(Y_{ijk}, Y_{ijk'}) & = E[(Y_{ijk} - E[Y_{ijk}])(Y_{ijk'} - E[Y_{ijk'}])]                                                               \\
+			                             & = E[(\mu_{ij} + \epsilon_{ijk})(\mu_{ij} + \epsilon_{ijk})]                                                       \\
+			                             & = E[(\mu_{ij}\mu_{ij})] + E[(\mu_{ij}\sigma_{ijk})] + E[(\mu_{ij}\sigma_{ijk'})] + E[(\sigma_{ijk}\sigma_{ijk'})] \\
+			                             & = cov(\mu_{ij}) + 0 + 0 + 0                                                                                       \\
+			                             & = \boxed{\sigma^2_i}
+		      \end{split}
+	      \]
+	\item Show that, $k \neq k'$
+	      $$
+		      Corr(Y_{ijk}, Y_{ijk'}) = \frac{\sigma^2_u}{\sigma^2_u + \sigma^2_e}
+	      $$
 \end{enumerate}
 
 \end{document}
