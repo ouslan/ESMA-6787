@@ -584,6 +584,14 @@ Further, assume that $\mu_{ij}\sim N(0,\sigma^2_u)$ and $\epsilon_{ijk} \sim N(0
 	      $$
 		      Corr(Y_{ijk}, Y_{ijk'}) = \frac{\sigma^2_u}{\sigma^2_u + \sigma^2_e}
 	      $$
+	      \textbf{Answer:}
+	      \[
+		      \begin{split}
+			      Corr(Y_{ijk}, Y_{ijk'}) & = \frac{cov(Y_{ijk})}{\sqrt{var(Y_{ijk}) var(Y_{ijk'})}}                       \\
+			                              & = \frac{\sigma_u^2}{\sqrt{(\sigma^2_u + \sigma^2_e)(\sigma^2_u + \sigma^2_e)}} \\
+			                              & = \boxed{\frac{\sigma^2_u}{\sigma^2_u + \sigma^2_e}}                           \\
+		      \end{split}
+	      \]
 \end{enumerate}
 
 \end{document}
