@@ -410,15 +410,145 @@ drove each car twice over a 40-mile test course and the miles per gallon were re
 \begin{enumerate}[(a)]
   \item Test whether or not the two factors interact. State the alternative, decision rule, and 
     conclusion. What is the p-value of the test?
+    \begin{enumerate}
+      \item $H_0$: There is no intereaciton between driver and car 
+      \item $H_a$: There is interaciton between driver and car
+    \end{enumerate}
+
+\begin{table}[!ht]
+    \centering
+    \caption{ANOVA Results for Two-Way Interaction (Driver and Car)}
+    \begin{tabular}{c c c c c c}
+        \hline
+        \textbf{Source} & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Squares} & \textbf{F} & \textbf{PR(>F)} \\
+        \hline
+        C(Driver)        & 3.0  & 280.28475  & 93.428250  & 531.597440 & 3.125304e-19 \\
+        C(Car)           & 4.0  & 94.71350   & 23.678375  & 134.727596 & 3.663600e-14 \\
+        C(Driver):C(Car) & 12.0 & 2.44650    & 0.203875   & 1.160028   & 3.714839e-01 \\
+        Residual         & 20.0 & 3.51500    & 0.175750   & NaN        & NaN \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Answer:} Given that the p-value is 0.37 and it is grater than the critical value we don't have sufficient evidence 
+to reject the null hypothesis and say there is interaction present.
+
   \item Test separately whether or not factor A and factor B main effects are present. For each 
     test, and state the alternatives, decision rule, and conclusion. What is the p-value for each test?
+
+\textbf{Driver effect}
+\begin{enumerate}
+  \item $H_0$: The miles per gallon for each driver is the same 
+  \item $H_a$: At least one is different
+\end{enumerate}
+
+\textbf{Car effect}
+\begin{enumerate}
+  \item $H_0$: The miles per gallon for each car is the same 
+  \item $H_a$: At least one is different
+\end{enumerate}
+
+
+\begin{table}[!ht]
+    \centering
+    \caption{ANOVA Results for Gasoline Consumption (Driver and Car)}
+    \begin{tabular}{c c c c c c}
+        \hline
+        \textbf{Source} & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Squares} & \textbf{F} & \textbf{PR(>F)} \\
+        \hline
+        C(Driver)        & 3.0  & 280.28475  & 93.42825  & 501.502 & 5.728485e-27 \\
+        C(Car)           & 4.0  & 94.71350   & 23.67838  & 127.100 & 3.668485e-19 \\
+        Residual         & 32.0 & 5.96150    & 0.18630   & NaN     & NaN \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Answer:} Looking at the table both Driver and Car have p-values below the critical value of 0.05 thus we reject the null 
+hypothesis and conclude there is both a driver effect and a car effect. 
+
   \item Obtain point estimates of and which factor appears to have the greater effect on gasoline consumption?
-  \item Use the Satterhwait procedure to obtain an approximate 95 percent confidence interval. 
+    \begin{table}[!ht]
+    \centering
+    \caption{Driver Means}
+    \begin{tabular}{c|c}
+        \hline
+        \textbf{Driver} & \textbf{Mean MPG} \\
+        \hline
+        1 & 26.93 \\
+        2 & 34.15 \\
+        3 & 28.85 \\
+        4 & 30.26 \\
+        \hline
+    \end{tabular}
+\end{table}
+\begin{table}[!ht]
+    \centering
+    \caption{Car Means}
+    \begin{tabular}{c|c}
+        \hline
+        \textbf{Car} & \textbf{Mean MPG} \\
+        \hline
+        Car\_1 & 28.96 \\
+        Car\_2 & 32.25 \\
+        Car\_3 & 27.91 \\
+        Car\_4 & 31.16 \\
+        Car\_5 & 29.95 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Answer:} Looking at the means driver 2 and car 2 produce the most MPG consumption. Another way you could determine this is using the 
+OLS and looking at the coaliciones it generates and seeing which has the biggest coef
+
+  \item Use the Satterhwaite procedure to obtain an approximate 95 percent confidence interval. 
     Is your interval estimate reasonably precise? Comment
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{c|c|c}
+\hline
+\textbf{Parameter}        & \textbf{Lower Bound} & \textbf{Upper Bound} \\
+\hline
+Intercept                 & 25.452               & 26.238               \\
+C(Driver)[T.2]            & 6.827                & 7.613                \\
+C(Driver)[T.3]            & 1.527                & 2.313                \\
+C(Driver)[T.4]            & 2.937                & 3.723                \\
+C(Car)[T.Car2]           & 2.848                & 3.727                \\
+C(Car)[T.Car3]           & -1.490               & -0.610               \\
+C(Car)[T.Car4]           & 1.760                & 2.640                \\
+C(Car)[T.Car5]           & 0.548                & 1.427                \\
+\hline
+\end{tabular}
+\caption{95\% Confidence Intervals for Model Parameters}
+\label{tab:conf_intervals}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{c|c|c}
+\hline
+\textbf{Parameter}        & \textbf{Lower Bound} & \textbf{Upper Bound} \\
+\hline
+Intercept                 & 25.30               & 26.39               \\
+C(Driver)[T.1]            & 6.80                & 7.64                \\
+C(Driver)[T.2]            & 1.44                & 2.40                \\
+C(Driver)[T.3]            & 2.86                & 3.80                \\
+C(Car)[T.Car1]           & 2.73                & 3.85                \\
+C(Car)[T.Car2]           & -1.58               & -0.52               \\
+C(Car)[T.Car3]           & 1.68                & 2.72                \\
+C(Car)[T.Car4]           & 0.52                & 1.46                \\
+\hline
+\end{tabular}
+\caption{95\% Confidence Intervals with Robust Standard Errors}
+\label{tab:conf_intervals_robust}
+\end{table}
+
+\textbf{Answer:} they are some what more presice but the not as much as i would expect or reasonably argue.
+
 \end{enumerate}
 
 \section*{Problem 5: Derive estimators}
-Some students (Junior, Ariana, Yeily, etc.) mentioned they wanted to derived some of the equations. 
+Some students (Junior, Ariana, Yeily, etc.) mentioned they wanted to derived some of the equations.
 Consider the following model $Y_{jik} = \mu + \alpha_i + \beta_j + \mu_{ij} + \epsilon_{ijk}; k=1,\ldots,K;i=1,2$. 
 Further, assume that $\mu_{ij}\sim N(0,\mu^2_u)$ and $\epsilon_{ijk} \sim N(0,\sigma^2_e)$
 
