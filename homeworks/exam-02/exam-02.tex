@@ -314,10 +314,68 @@ Table 1
 \begin{enumerate}[(a)]
   \item Create interaction plots of the estimated treatment means. Does it appear that treatment 
     interaction effects are present?
-  \item Create the skeleton ANOVA. If there arte any random effects mark them. 
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.5\textwidth]{assets/prob3a.png}
+		      \caption{Interaction Graph}
+	      \end{figure}
+
+  \textbf{Answer:} There apear to be no interaction between model type and problem. There apear to be a reduction in the completion time from a stats 
+  problem to a engineering problem. The overall effect is that the new model reduced the completion time.
+
+  \item Create the skeleton ANOVA. If there are any random effects mark them. 
+
+
+\begin{table}[ht]
+\centering
+\caption{Skeleton ANOVA Table for Mixed Effects Model}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Source of Variation} & \textbf{df} & \textbf{SS} & \textbf{MS} & \textbf{F} \\
+\hline
+\textbf{Fixed Effects} & & & & \\
+Model (C(Model)) & 1 & SS\(_{M}\) & MS\(_{M}\) & F\(_{M}\) \\
+Problem (C(Problem)) & 1 & SS\(_{Problem}\) & MS\(_{P}\) & F\(_{P}\) \\
+Model $\times$ Problem (C(Model):C(Problem)) & 1 & SS\(_{M \times P}\) & MS\(_{M \times P}\) & F\(_{M \times P}\) \\
+\hline
+\textbf{Random Effects (R)} & & & & \\
+Programmer (random) & \(b-1 = 5\) & SS\(_{Prog}\) & MS\(_{Prog}\) & — \\
+Residual/Error (within Programmer) & \(ab - a - b + 1 = 18\) & SS\(_{R}\) & MS\(_{R}\) & — \\
+\hline
+Total & \(N-1 = 23\) & SS\(_{Total}\) & — & — \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\pagebreak
+
   \item Obtain the analysis of variance table.
+
+\begin{table}[!ht]
+\centering
+\caption{Mixed Linear Model Fixed Effects Results}
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Effect} & \textbf{Coef.} & \textbf{Std. Err.} & \textbf{z-value} & \textbf{p-value} & \textbf{95\% CI} \\
+\hline
+Intercept & 5.167 & 0.131 & 39.402 & 0.000 & [4.910, 5.424] \\
+C(Model)[T.New] & -2.683 & 0.150 & -17.911 & 0.000 & [-2.977, -2.390] \\
+C(Problem)[T.Stat] & 2.450 & 0.150 & 16.354 & 0.000 & [2.156, 2.744] \\
+C(Model)[T.New]:C(Problem)[T.Stat] & -1.567 & 0.212 & -7.394 & 0.000 & [-1.982, -1.151] \\
+\hline
+\end{tabular}
+\end{table}
+
+
   \item Test Whether or not the two treatment factors interact. State the alternatives, decision 
     rule, and conclusion. What is the p-value of the test?
+  \begin{enumerate}
+    \item $H_0$: There is no interaction 
+    \item $H_a$: There is interaction
+  \end{enumerate}
+  \textbf{Answer:} Given the previous table we see that the p value of $0.00$ and it is less than the critical value $0.05$ we reject the null hypothesis
+  and conclude that the time to solve the problem depends on the type of problem 
 \end{enumerate}
 
 \section*{Problem 4: Automobile Manufacture}
