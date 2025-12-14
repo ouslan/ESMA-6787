@@ -7,9 +7,7 @@ def main() -> None:
     df = pd.read_csv("marketing.txt", sep=r"\s+")
     plt.figure(figsize=(8, 6))
 
-    sns.lineplot(
-        data=df, x="Fee", y="WorkIndex", hue="Supervisory", marker="o", palette="tab10"
-    )
+    sns.lineplot(data=df, x="Fee", y="WorkIndex", hue="Supervisory")
     plt.title("Interaction Plot of Fee Schedule and Supervisory on WorkIndex")
     plt.xlabel("Fee Schedule")
     plt.ylabel("WorkIndex (Quality of Work)")

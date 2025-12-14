@@ -212,26 +212,6 @@ their work evaluated. See \textbf{marketing.txt} files for this dataset.
 		      \item $H_0$: There is no three way interaction
 		      \item $H_a$: There is three way interaction
 	      \end{enumerate}
-	      \begin{table}[!ht]
-		      \centering
-		      \caption{ANOVA for the Effect of Fee, Schedule, and Supervisory on Work Index (Part 1)}
-		      \begin{tabular}{lrrrr}
-			      \hline
-			      \textbf{Source}                   & \textbf{df} & \textbf{Sum of Squares} & \textbf{Mean Square} \\
-			      \hline
-			      C(Fee)                            & 2.0         & 10044.27                & 5022.14              \\
-			      C(Schedule)                       & 1.0         & 1833.98                 & 1833.98              \\
-			      C(Supervisory)                    & 1.0         & 3832.40                 & 3832.40              \\
-			      C(Fee):C(Schedule)                & 2.0         & 1.60                    & 0.80                 \\
-			      C(Fee):C(Supervisory)             & 2.0         & 0.79                    & 0.39                 \\
-			      C(Schedule):C(Supervisory)        & 1.0         & 574.78                  & 574.78               \\
-			      C(Fee):C(Schedule):C(Supervisory) & 2.0         & 3.94                    & 1.97                 \\
-			      Residual                          & 36.0        & 266.14                  & 7.39                 \\
-			      \hline
-		      \end{tabular}
-	      \end{table}
-
-	      \pagebreak
 
 	      \begin{table}[!ht]
 		      \centering
@@ -252,8 +232,12 @@ their work evaluated. See \textbf{marketing.txt} files for this dataset.
 		      \end{tabular}
 	      \end{table}
 
-	      \textbf{Answer:} Given that C(Fee):C(Schedule):C(Supervisory) as a p-value of $0.67$ we don't have enough evidence to
+	      \textbf{Answer:} Given that C(Fee):C(Schedule):C(Supervisory) as a p-value of $0.767$ we don't have enough evidence to
 	      reject the null hypothesis thous we conclude there is not sufficient evidence to conclude that there is a three way interaction
+
+	      \begin{pythonbox}[Code for Anova Table]
+		      \inputminted{python}{code/problem2d.py}
+	      \end{pythonbox}
 
 	\item Test for factor fee schedule main effects; use $\alpha= 0.05$. State the alternatives, decision rule, and conclusion. Hint: You can use the confidence interval.
 	      \begin{enumerate}
@@ -295,6 +279,10 @@ their work evaluated. See \textbf{marketing.txt} files for this dataset.
 \textbf{Answer:} Looking at the p-values both the fee and the schedule and the fee have a negative impact of the work
 productivity. Looking at the confidence intervals the fee 3 seems to have the negative impact while level 2 does not
 seem to have an impact given that it does not include 0.
+
+\begin{pythonbox}[Code for Anova Table]
+	\inputminted{python}{code/problem2e.py}
+\end{pythonbox}
 
 \section*{Problem 3: Calculator}
 
@@ -339,6 +327,13 @@ Table 1
 	      \textbf{Answer:} There apear to be no interaction between model type and problem. There apear to be a reduction in the completion time from a stats
 	      problem to a engineering problem. The overall effect is that the new model reduced the completion time.
 
+	      \pagebreak
+	      \begin{pythonbox}[Code for Anova Table]
+		      \inputminted{python}{code/problem3a.py}
+	      \end{pythonbox}
+
+	      \pagebreak
+
 	\item Create the skeleton ANOVA. If there are any random effects mark them.
 
 
@@ -363,9 +358,6 @@ Table 1
 		      \end{tabular}
 	      \end{table}
 
-
-	      \pagebreak
-
 	\item Obtain the analysis of variance table.
 
 	      \begin{table}[!ht]
@@ -382,7 +374,9 @@ Table 1
 			      \hline
 		      \end{tabular}
 	      \end{table}
-
+	      \begin{pythonbox}[Code for Anova Table]
+		      \inputminted{python}{code/problem3c.py}
+	      \end{pythonbox}
 
 	\item Test Whether or not the two treatment factors interact. State the alternatives, decision
 	      rule, and conclusion. What is the p-value of the test?
@@ -448,6 +442,8 @@ drove each car twice over a 40-mile test course and the miles per gallon were re
 
 	      \textbf{Answer:} Given that the p-value is 0.37 and it is grater than the critical value we don't have sufficient evidence
 	      to reject the null hypothesis and say there is interaction present.
+
+	      \pagebreak
 
 	\item Test separately whether or not factor A and factor B main effects are present. For each
 	      test, and state the alternatives, decision rule, and conclusion. What is the p-value for each test?
